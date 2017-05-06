@@ -1,0 +1,26 @@
+<html>
+  {% include head.html %}
+  <body>
+    {% include header.html %}
+    <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      <div class="home">
+        <h1 class="page-heading">文章列表</h1>
+        <ul class="post-list">
+          {% for post in site.posts %}
+          <li>
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+          <h2>
+            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          </h2>
+          </li>
+          {% endfor %}
+        </ul>
+        <p class="rss-subscribe"><a href="/feed.xml">订阅 RSS</a></p>
+      </div>
+    </div>
+    </main>
+    {% include footer.html %}
+  </body>
+</html>
