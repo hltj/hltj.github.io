@@ -16,7 +16,7 @@
 title: 灰蓝时光
 # email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
-  灰蓝时光：个人原创与心得分享。大到编程、架构、技术管理、培训技能，小到点滴心得。
+  灰蓝时光：个人原创与心得分享。大到编程、架构、技术管理、培训技能，小到瞬时感悟与点滴心得。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
