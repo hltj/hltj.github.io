@@ -13,6 +13,15 @@ permalink: /about/
 
 追随 UNIX 与开源文化，维护/参与多个开源项目。关注传统文化，零星有作几首词。
 
+目前主要维护的开源项目有：
+#### ![灰蓝天际](/assets/wxmedit.png) wxMEdit
+  - [https://wxmedit.github.io/](https://wxmedit.github.io/)
+  - 高级文本/十六进制编辑器 wxMEdit
+
+#### ![灰蓝天际](/assets/kotlin.png) Kotlin 语言中文站
+  - [https://www.kotlincn.net/](https://www.kotlincn.net/)
+  - Kotlin 语言官方站的中文翻译
+
 欢迎关注：  
 GitHub：[hltj](https://github.com/hltj)  
 微博：[灰蓝天际](http://weibo.com/hltj)
