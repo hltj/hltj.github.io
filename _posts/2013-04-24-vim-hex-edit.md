@@ -7,6 +7,8 @@ categories: tips
 ## 开始十六进制编辑
 要在 vim 中开始十六进制编辑，可通过如下命令
 
+<!--more-->
+
 ```vim
 :e ++bin ++enc=ansi | %!xxd -g1
 :set ft=xxd

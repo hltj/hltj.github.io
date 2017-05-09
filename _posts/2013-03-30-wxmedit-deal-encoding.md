@@ -7,6 +7,7 @@ categories: encoding
 ***工欲善其事，必先利其器。***  
 ***　　　　　　——《论语》***
 
+<!--more-->
 
 好的工具的确能让工作事半功倍，尤其处理棘手的疑难问题时。接触过不少文本编辑器，其中有两个我觉得称得上处理编码问题的利器：[Vim](http://www.vim.org/) 和 [wxMEdit](https://wxmedit.github.io/zh_CN/)，都是跨平台的开源软件。
 

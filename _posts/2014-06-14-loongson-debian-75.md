@@ -9,6 +9,8 @@ categories: loongson
 - 空优盘一只。
 - 可联网的既有的 Linux 系统。
 
+<!--more-->
+
 ### 2、将空优盘首格式化为ext2/ext3：
 - 可在既有 Linux 系统中用 fdisk/cfdisk 来分区，用 mkfs.ext2/mkfs.ext3 格式化。
 - 如果既有 Linux 有装图形桌面环境，并且有装 [GParted](http://gparted.org/)，则可用 GParted 分区并格式化。

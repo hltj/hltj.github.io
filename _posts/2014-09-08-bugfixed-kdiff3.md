@@ -6,6 +6,8 @@ categories: tips
 ---
 [KDiff3](http://kdiff3.sourceforge.net/) 是自由软件，是一款相当不错的比较工具，尤其以三路比较/三路合并见长。
 [TortoiseHg](https://tortoisehg.bitbucket.io/) 是最好用的 Mercurial 客户端之一，与 TortoiseSVN、TortoiseGit 不同，它是跨平台的自由软件，早期版本基于 PyGTK，从 2.0 新版开始基于 PyQt。其 Windows 版安装包中自带 KDiff3 作为版本比较/合并工具。
+
+<!--more-->
  
 但是 KDiff3 旧版本（TortoiseHg 自带的 0.9.96a，2014.09.04 最新版 3.1.1 自带仍是这个版本）有[中文按照西文宽度处理导致显示错乱](http://sourceforge.net/p/kdiff3/bugs/162/)的问题：
 

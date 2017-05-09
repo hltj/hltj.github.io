@@ -32,3 +32,4 @@ exclude:
   - Gemfile.lock
 minima:
   date_format: "%Y-%m-%d"
+excerpt_separator: "<!--more-->"

@@ -7,6 +7,8 @@ categories: wxmedit
 wxMEdit 迁移到到新的网站了：
 [https://wxmedit.github.io/](https://wxmedit.github.io/)
 
+<!--more-->
+
 下载页地址为：
 [https://wxmedit.github.io/downloads.html](https://wxmedit.github.io/)
  

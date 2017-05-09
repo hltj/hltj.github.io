@@ -6,6 +6,8 @@ categories: encoding
 ---
 接上文，跨平台的开源软件 Vim 和 wxMEdit 是我用过的两个最擅长处理编码问题的文本编辑器。
 
+<!--more-->
+
 上文说了 wxMEdit
 - ![wxmedit.png](/assets/wxmedit_64.png) [https://wxmedit.github.io/zh_CN/](https://wxmedit.github.io/zh_CN/)
 

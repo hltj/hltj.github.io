@@ -8,6 +8,8 @@ categories: wxmedit
 [![wxmedit.png](/assets/wxmedit.png) wxMEdit](https://wxmedit.github.io/zh_CN/) 是一个跨平台的文本编辑器，支持列编辑、十六进制编辑、语法高亮、自动换行、编码识别和转换、字数统计等功能。
 wxMEdit 是 MadEdit 的后继，这些功能都是从 MadEdit 继承而来。
 
+<!--more-->
+
 MadEdit 本是一个我用过的非常不错的文本编辑器，尤其在十六进制编辑、编码识别和转换方面。可惜很久没人维护了，一直有接手它的想法。这些在之前写的[《处理编码问题利器之文本编辑器⑴——wxMEdit》](/encoding/2013/03/30/wxmedit-deal-encoding.html)中也提到了，还有之前这篇本来的标题和内容都是讲 MadEdit 的。
 我们需要感谢 MadEdit 作者提供了这么好用的编辑器，向原作者致敬。
 

@@ -6,6 +6,8 @@ categories: wxmedit
 ---
 *原本于 2014.5.24 完成的，现在补记下。*
 
+<!--more-->
+
 wxMEdit 是对编码和十六进制编辑支持很好的文本编辑器。
 wxMEdit 是 MadEdit 的后继，MadEdit 本身就是对编码和十六进制支持不错的高级文本编辑器，可惜很久没人维护了。创建 wxMEdit 的初衷就是提供一个持续维护、有 bug 修复、功能改善及重构的文本/十六进制编辑器。参见 [wxMEdit 简体中文简介](https://wxmedit.github.io/zh_CN/)、[处理编码问题利器之文本编辑器⑴——wxMEdit](/encoding/2013/03/30/wxmedit-deal-encoding.html)。
  

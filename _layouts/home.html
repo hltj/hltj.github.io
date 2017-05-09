@@ -8,13 +8,18 @@
         <h1 class="page-heading">文章列表</h1>
         <ul class="post-list">
           {% for post in site.posts %}
-          <li>
-          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-          <span class="post-meta">{{ post.date | date: date_format }}</span>
-          <h2>
-            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-          </h2>
-          </li>
+            <li>
+              {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+              <span class="post-meta">{{ post.date | date: date_format }}</span>
+              <a href="{{ post.url | relative_url }}">
+                <h2 class="post-link">{{ post.title | escape }}</h2>
+                <blockquote style="font-size: 11pt;">
+                  {% if post.excerpt %}
+                    {{ post.excerpt | strip_html }}
+                  {% endif %}……
+                </blockquote>
+              </a>
+            </li>
           {% endfor %}
         </ul>
         <p class="rss-subscribe"><a href="/feed.xml">订阅 RSS</a></p>
