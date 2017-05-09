@@ -1,9 +1,13 @@
-<header class="site-header" role="banner">
+<header class="site-header" style="background-color: #3C60C6;" role="banner">
 
   <div class="wrapper">
+    <style>
+      .site-nav { background-color: #3C60C6; }
+      .site-nav .menu-icon > svg path { fill: white; }
+    </style>
     {% assign default_paths = site.pages | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
-    <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    <a class="site-title" style="color:white; font-weight: bold;" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
   
     {% if page_paths %}
       <nav class="site-nav">
@@ -22,7 +26,7 @@
           {% for path in page_paths %}
             {% assign my_page = site.pages | where: "path", path | first %}
             {% if my_page.title %}
-            <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+            <a class="page-link" style="color:white; font-weight: bold;" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
             {% endif %}
           {% endfor %}
         </div>
