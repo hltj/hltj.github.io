@@ -3,6 +3,9 @@ layout: page
 title: 关于
 permalink: /about/
 ---
+<style>
+.sidebar { display: none; }
+</style>
 
 ## ![灰蓝天际](/assets/hltj.png) 灰蓝天际
 多年互联网研发从业者。
@@ -29,3 +32,6 @@ permalink: /about/
 欢迎关注：  
 GitHub：[hltj](https://github.com/hltj)  
 微博：[灰蓝天际](http://weibo.com/hltj)
+
+![weibo_qr.png](/assets/weibo_qr.png)
+
