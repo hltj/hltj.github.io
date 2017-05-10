@@ -17,7 +17,7 @@ categories: encoding
 ## Vim 是什么
 Vim是世界上公认的第二大文本编辑器（第一大是 GNU Emacs；似有“Emacs 是神的编辑器、Vim 是编辑器之神”之说）。很多人会觉得 vim 很不易用，这其中也有一定的误解。
  
-首先需要弄清楚的是 ***vim 不是 vi***。如今的 vim 是 **V**i **IM**proved 的缩写，相对原始 vi 做了相当多的改善，原本 vi 的功能只占它现有功能很少的一部分。
+首先需要弄清楚的是 **vim 不是 vi**{:style="color: green"}。如今的 vim 是 **V**i **IM**proved 的缩写，相对原始 vi 做了相当多的改善，原本 vi 的功能只占它现有功能很少的一部分。
 
 ## Vim 易用性
 Vim 并不像想象中的那么难用，不习惯用“`h`、`j`、`k`、`l`”移动光标，完全可以用上下左右，甚至 `home`、`end`、`page up`、`page down`。
@@ -53,7 +53,7 @@ vim test.txt
 :set fenc?
 ```
 
-问号**可以**省略。
+问号**可以**{:style="color: green"}省略。
 
 但是其中字符 '\x96' 在 ISO-8859-1 中未定义（未定义字符 vim 会用蓝色显示其编码值），可以人为判断它是 windows-1252 编码（可显字符是 latin1 的超集）的。可通过下面命令手动指定为 windows-1252 编码。
 
@@ -126,6 +126,6 @@ vim test.txt
 :set bomb?
 ```
 
-问号***不可***省略。
+问号**不可**{:style="color: red"}省略。
 
 有任何问题和建议可以留言，或者发邮件给我 jiaywe[ａｔ]gmail.com。
