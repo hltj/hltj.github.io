@@ -1,16 +1,30 @@
+<style>
+.qrs { width: 210; float: right; }
+
+@media screen and (max-width: 1169px) {
+ .qrs { display: block; }
+}
+
+@media screen and (min-width: 1170px) {
+ .qrs { display: none; }
+}
+</style>
 <footer class="site-footer">
   <div class="wrapper">
     <div class="footer-col-wrapper">
+      <div class="qrs">
+        <img src="/assets/weibo_qr.png" width="100">
+      </div>
       <div class="footer-col footer-col-1">
         {% include social_list.html %}
       </div>
       <div class="footer-col footer-col-2">
-	<p>
-          <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/deed.zh" title="署名-非商业-禁止演绎"><img src="/assets/cc-by-nc-nd.svg" width="80" height="20"></a>
-	</p>
         <p>
-	&copy; 2017 <a href="{{ site.url }}">灰蓝天际</a>
-	</p>
+          <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/deed.zh" title="署名-非商业-禁止演绎"><img src="/assets/cc-by-nc-nd.svg" width="80" height="20"></a>
+        </p>
+        <p>
+        &copy; 2017 <a href="{{ site.url }}">灰蓝天际</a>
+        </p>
       </div>
       <div class="footer-col footer-col-3">
         <p>{{ site.description | escape }}</p>
