@@ -5,6 +5,8 @@ permalink: /about/
 ---
 <style>
 .sidebar { display: none; }
+.qrs img { display: none; }
+th img { margin: 0 10px 0 10px; }
 </style>
 
 ## ![灰蓝天际](/assets/hltj.png) 灰蓝天际
@@ -33,5 +35,6 @@ permalink: /about/
 GitHub：[hltj](https://github.com/hltj)  
 微博：[灰蓝天际](http://weibo.com/hltj)
 
-![weibo_qr.png](/assets/weibo_qr.png)
-
+| ![weibo_qr.png](/assets/weibo_qr.png) | ![weibo_qr.png](/assets/wechat_qr.png) |
+|:-----:|:------:|
+| 微博  | 公众号 |
