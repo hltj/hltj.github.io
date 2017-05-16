@@ -18,11 +18,11 @@ layout: default
   <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
-  <div style="float:right">灰蓝天际  <img src="/assets/hltj.png" alt="灰蓝天际" /></div>
-
-  {% if site.disqus.shortname %}
-    {% include disqus_comments.html %}
-  {% endif %}
+  <div style="width: 100%; overflow: auto;">
+    <div style="float:right">灰蓝天际  <img src="/assets/hltj.png" alt="灰蓝天际" /></div>
+  </div>
+  <br><hr><br>
+  {% include social_info.html %}
 </article>
 <style>
 #yun-tie-sdk-wrap .tie-panel-bar .tie-empty-tip {

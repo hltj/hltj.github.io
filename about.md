@@ -5,7 +5,6 @@ permalink: /about/
 ---
 <style>
 .sidebar { display: none; }
-.qrs img { display: none; }
 th img { margin: 0 10px 0 10px; }
 </style>
 
@@ -31,10 +30,4 @@ th img { margin: 0 10px 0 10px; }
   - [https://www.gitbook.com/book/hltj/kotlin-reference-chinese/details](https://www.gitbook.com/book/hltj/kotlin-reference-chinese/details)
   - Kotlin 官方参考文档 中文版
 
-欢迎关注：  
-GitHub：[hltj](https://github.com/hltj)  
-微博：[灰蓝天际](http://weibo.com/hltj)
-
-| ![weibo_qr.png](/assets/weibo_qr.png) | ![weibo_qr.png](/assets/wechat_qr.png) |
-|:-----:|:------:|
-| 微博  | 公众号 |
+{% include social_info.html %}
