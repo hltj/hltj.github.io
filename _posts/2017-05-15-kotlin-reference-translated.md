@@ -2,7 +2,7 @@
 layout:     post
 title:      "Kotlin 官方参考文档翻译完毕"
 date:       2017-05-15 19:23:19 +0800
-categories: intro
+categories: kotlin
 ---
 非常高兴跟大家宣布：Kotlin 官方文档的参考部分已翻译校对完毕、且与官网同步，这也是目前唯一完整且最新的官方参考文档翻译。
 
