@@ -10,9 +10,13 @@ layout: default
         {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
         {{ page.date | date: date_format }}
       </time>
-      {% if page.author %}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
-      {% endif %}</p>
+      {% assign author = page.author | default: "灰蓝天际" %}
+      •<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ author }}</span></span>
+    </p>
+    <p>
+      {% assign fullurl = site.url | append: page.url %}
+      本文链接：<a href="{{ fullurl }}">{{ fullurl }}</a> 。
+    </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -21,7 +25,10 @@ layout: default
   <div style="width: 100%; overflow: auto;">
     <div style="float:right">灰蓝天际  <img src="/assets/hltj.png" alt="灰蓝天际" /></div>
   </div>
-  <br><hr><br>
+  <p>
+    转载请勿修改，并注明作者：{{ author }} 及许可协议：<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">署名-非商业性使用-禁止演绎</a>。<br>
+  </p>
+  <hr><br>
   {% include social_info.html %}
 </article>
 <style>
