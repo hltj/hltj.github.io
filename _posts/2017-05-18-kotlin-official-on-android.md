@@ -55,7 +55,7 @@ output = null   // 编译错误
 
 > Kotlin 可以保护你避免对可空类型的误操作
 > ```kotlin
-val name: String? = null    // 可控类型
+val name: String? = null    // 可空类型
 println(name.length())      // 编译错误
 ```
 
