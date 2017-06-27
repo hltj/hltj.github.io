@@ -89,8 +89,8 @@ createHTML().table {
 ```
 
 这个例子比较复杂，建议对 Kotlin 熟悉一定程度再来看。
-最上方声明了一个不可变的 `data` 作为创建 HTML 用的数据。它是一个由 `mapOf` 函数创建的映射（map），其键值对简单明了。
-接下来的 `table` 是一个方法（或[扩展函数](https://www.kotlincn.net/docs/reference/extensions.html)），
+最上方声明了一个不可变的 `data` 作为创建 HTML 用的数据。它是一个由 `mapOf` 函数创建的映射（map），其中用[扩展函数](https://www.kotlincn.net/docs/reference/extensions.html) `to` 的[中缀调用形式](https://www.kotlincn.net/docs/reference/functions.html#中缀表示法)来创建键值对。
+接下来的 `table` 是一个方法（或扩展函数），
 它接受一个 Lambda 表达式，对于这种情况的函数调用[可省略括号](https://www.kotlincn.net/docs/reference/lambdas.html)。之后 for 循环中的 `tr` 和 `td` 与 `table` 类似，
 只是它们有[隐式接收者](https://www.kotlincn.net/docs/reference/lambdas.html#带接收者的函数字面值)。
 此外 for 循环的条件用到了[解构声明](https://www.kotlincn.net/docs/reference/multi-declarations.html)，
