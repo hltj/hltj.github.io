@@ -41,8 +41,8 @@ sealed class Maybe<out T> {
 很快我们就会看到将函数应用到 `Just<T>`上 还是应用到 `Nothing#` 上会有多么不同。
 首先我们来说说 Functor 吧！
 
-> **注：** 这里用 `Nothing#` 取代原文的 `Nothing`，鉴于在 Kotlin 中 `Nothing` 是一个特殊类型，参见 [Nothing 类型](https://www.kotlincn.net/docs/reference/exceptions.html#nothing-类型)。
-> 并且 Kotlin 有自己的表达可选值的方式，并非使用 `Maybe` 类型这种方式，参见[空安全](https://www.kotlincn.net/docs/reference/null-safety.html)。
+> **注：** 这里用 `Nothing#` 取代原文的 `Nothing`，因为在 Kotlin 中 `Nothing` 是一个特殊类型，参见 [Nothing 类型](https://www.kotlincn.net/docs/reference/exceptions.html#nothing-类型)。
+> 另外 Kotlin 有自己的表达可选值的方式，并非使用 `Maybe` 类型这种方式，参见[空安全](https://www.kotlincn.net/docs/reference/null-safety.html)。
 
 ## Functor
 
@@ -52,8 +52,8 @@ sealed class Maybe<out T> {
 
 这就轮到 `fmap` 出场了。
 `fmap` 翩翩而来，从容应对上下文。
-`fmap` 知道如何将函数应用到包装在上下文中的值。
-例如，你想将 `{it + 3}` 应用到 `Just(2)`。
+`fmap` 知道如何将函数应用到包装在上下文中的值上。
+例如，你想将 `{it + 3}` 应用到 `Just(2)` 上。
 使用 `fmap` 如下：
 
 ``` kotlin
@@ -87,7 +87,7 @@ Just(value=5)
 ```
 
 而 `fmap` 神奇地应用了这个函数，因为 `Maybe` 是一个 Functor。
-它指定了 `fmap` 如何应用到 `Just` 以及 `Nothing#` 上：
+它指定了 `fmap` 如何应用到 `Just` 上与 `Nothing#` 上：
 
 ``` kotlin
 fun <T, R> Maybe<T>.fmap(transform: (T) -> R): Maybe<R> = when(this) {
