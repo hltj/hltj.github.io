@@ -376,12 +376,13 @@ Nothing#
 
 > **Note:** The built-in null safety syntax of Kotlin can provied monad-like operations including chaining the calls:
 > ``` kotlin
-fun Int?.half() = this?.let {
-    if (this % 2 == 0) this / 2 else null
-}
-val n: Int? = 20
-n?.half()?.half()?.half()
-```
+> fun Int?.half() = this?.let {
+>     if (this % 2 == 0) this / 2 else null
+> }
+> 
+> val n: Int? = 20
+> n?.half()?.half()?.half()
+> ```
 
 Cool stuff!
 So now we know that `Maybe` is a `Functor`, an `Applicative`, and a `Monad`.
@@ -393,9 +394,10 @@ Now let's mosey on over to another example: the `IO` monad:
 > **Note:** Since Kotlin doesn't distinguish between pure and impure function, it doesn't need IO monad at all.
 > This is just a emulation:
 > ``` kotlin
-data class IO<out T>(val `(-`: T)
-infix fun <T, R> IO<T>.`))=`(f: ((T) -> IO<R>)): IO<R> = f(this.`(-`)
-```
+> data class IO<out T>(val `(-`: T)
+> 
+> infix fun <T, R> IO<T>.`))=`(f: ((T) -> IO<R>)): IO<R> = f(this.`(-`)
+> ```
 
 Specifically three functions.
 `getLine` takes no arguments and gets user input:

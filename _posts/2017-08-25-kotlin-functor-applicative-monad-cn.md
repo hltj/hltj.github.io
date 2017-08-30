@@ -374,12 +374,13 @@ Nothing#
 
 > **注：** Kotlin 内置的空安全语法可以提供类似 monad 的操作，包括链式调用：
 > ``` kotlin
-fun Int?.half() = this?.let {
-    if (this % 2 == 0) this / 2 else null
-}
-val n: Int? = 20
-n?.half()?.half()?.half()
-```
+> fun Int?.half() = this?.let {
+>     if (this % 2 == 0) this / 2 else null
+> }
+> 
+> val n: Int? = 20
+> n?.half()?.half()?.half()
+> ```
 
 太酷了！
 于是现在我们知道 `Maybe` 既是 `Functor` 、又是 `Applicative` 还是 `Monad`。
@@ -391,9 +392,10 @@ n?.half()?.half()?.half()
 > **注：** 由于 Kotlin 并不区分纯函数与非纯函数，因此根本不需要 IO monad。
 > 这只是一个模拟：
 > ``` kotlin
-data class IO<out T>(val `(-`: T)
-infix fun <T, R> IO<T>.`))=`(f: ((T) -> IO<R>)): IO<R> = f(this.`(-`)
-```
+> data class IO<out T>(val `(-`: T)
+> 
+> infix fun <T, R> IO<T>.`))=`(f: ((T) -> IO<R>)): IO<R> = f(this.`(-`)
+> ```
 
 具体来看三个函数。
 `getLine` 没有参数并会获取用户输入：
