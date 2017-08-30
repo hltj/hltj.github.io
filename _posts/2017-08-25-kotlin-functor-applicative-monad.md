@@ -374,7 +374,7 @@ Nothing#
 ![](http://adit.io/imgs/functors/monad_chain.png)
 ![](http://adit.io/imgs/functors/whoa.png)
 
-> **Note:** The built-in null safety syntax of Kotlin can provied monad-like operations including chaining the calls:
+> **Note:** The built-in null safety syntax of Kotlin can provide monad-like operations including chaining the calls:
 > ``` kotlin
 > fun Int?.half() = this?.let {
 >     if (this % 2 == 0) this / 2 else null
