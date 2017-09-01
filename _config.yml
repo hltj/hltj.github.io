@@ -33,3 +33,4 @@ exclude:
 minima:
   date_format: "%Y-%m-%d"
 excerpt_separator: "<!--more-->"
+lang: "zh-Hans"

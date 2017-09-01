@@ -2,6 +2,7 @@
 layout:     post
 title:      "Kotlin Functors, Applicatives, And Monads In Picture"
 date:       2017-08-25 12:47:52 +0800
+lang:       en
 categories: kotlin
 ---
 > This is a translation of [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) from Haskell into Kotlin.
