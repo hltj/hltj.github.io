@@ -46,7 +46,7 @@ IDEA 内置的 REPL 有一些优势，例如像在代码窗口当中一样拥有
 
 ## 如何在 Kotlin REPL 中查看推断出的类型
 
-昨天看了 Benny 新发的文章[《val b = a?: 0，a 是 Double 类型，那 b 是什么类型？》](https://blog.kotliner.cn/2017/08/30/SuperTypes-in-Type-Inferring/)，文中详述了相关现象并分享了原因，是篇深度好文，在此也推荐给大家。
+昨天看了 Benny 新发的文章[《val b = a?: 0，a 是 Double 类型，那 b 是什么类型？》](https://blog.kotliner.cn/2017/08/30/SuperTypes-in-Type-Inferring/)，文中详述了相关现象并分析了原因，是篇深度好文，在此也推荐给大家。
 
 当时就想边看边在 REPL 中做实验，毕竟做实验这种事情最适合 REPL 做不过了。
 
