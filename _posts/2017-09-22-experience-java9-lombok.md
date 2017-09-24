@@ -43,14 +43,14 @@ jshell>
 
 `jshell> ` 是 JShell 的命令提示符，可在其后直接键入代码。在 JShell 中直接输入可运行的代码就可以，无需定义额外的类与 `main` 函数，还可以省略单行语句的分号。因此运行 Hello World 只需键入 `System.out.println("Hello, World!")` 即可，并且在输入过程中还可以通过 Tab 键补全：
 
-```
+``` java
 jshell> System.out.println("Hello, World!")
 Hello, World!
 ```
 
 大功告成。当然，如果只是想在 JShell 中查看一个表达式的求值结果，并不需要调用 `System.out.println()` 这么麻烦，而只需直接键入表达式然后回车即可：
 
-```
+``` java
 jshell> "Hello, World!"
 $2 ==> "Hello, World!"
 
@@ -60,7 +60,7 @@ $3 ==> 7.0685834705770345
 
 这实际上是 JShell 的“反馈”，如果希望反馈中包含表达式的类型，可以在启动时加命令行选项 `-v` 或者通过交互模式的命令 `/set feedback verbose` 切换到详细反馈模式：
 
-```
+``` java
 jshell> /set feedback verbose
 |  反馈模式: verbose
 
@@ -102,7 +102,7 @@ jshell>
 在执行完 hello.jsh 中的语句后进入了交互式模式，这并不是预期的结果，我们希望它执行完就退出而不是进入交互式模式。
 当然，这只需在文件末尾追加 `/exit` 命令即可：
 
-```
+``` bash
 $ echo '/exit' >> hello.jsh
 $ jshell hello.jsh
 Hello, World!
@@ -168,7 +168,7 @@ $ java -cp target/java9demo-hello-1.0-SNAPSHOT.jar me.hltj.java9demo.hello.Hello
 
 这是因为 Maven 默认的源代码和目标版本都是 1.5，而 JDK 9 支持的最低版本是 1.6，因此必须在 pom.xml 中显式指定这两个版本号：
 
-```
+``` xml
     <properties>
         <maven.compiler.source>1.9</maven.compiler.source>
         <maven.compiler.target>1.9</maven.compiler.target>
@@ -196,7 +196,7 @@ version = '1.0-SNAPSHOT'
 
 无需指定源代码与目标版本就可以正常构建运行：
 
-```
+``` bash
 $ ./gradlew build
 BUILD SUCCESSFUL in 1s
 $ java -cp build/libs/java9demo-hello-1.0-SNAPSHOT.jar me.hltj.java9demo.hello.Hello
@@ -321,7 +321,7 @@ lombok.addJavaxGeneratedAnnotation = false
 
 之后就可以使用 Java 9 顺利构建运行了：
 
-```
+``` bash
 $ java -jar target/java9demo-lombok-1.0-SNAPSHOT-jar-with-dependencies.jar
 17:24:57.723 [main] INFO me.hltj.java9demo.lombok.LombokDemo - Hello Lombok in Language(name=Java, version=9).
 ```
@@ -350,7 +350,7 @@ dependencies {
 
 但是使用 JDK 9 编译会遇到与 Maven 构建时相同的问题，这里采用第二种方案，在 build.gradle 中追加以下配置即可：
 
-```
+``` gradle
 compileJava {
     options.compilerArgs += ['--add-modules', 'java.xml.ws.annotation']
 }
