@@ -68,12 +68,12 @@ jshell> "Hello, World!"
 $4 ==> "Hello, World!"
 |  已创建暂存变量 $4 : String
 
-jshell> double circumference(double radius) {
+jshell> double areaOfCircle(double radius) {
    ...>     return Math.PI * radius * radius;
    ...> }
-|  已创建 方法 circumference(double)
+|  已创建 方法 areaOfCircle(double)
 
-jshell> circumference(1.5)
+jshell> areaOfCircle(1.5)
 $6 ==> 7.0685834705770345
 |  已创建暂存变量 $6 : double
 ```
