@@ -31,6 +31,16 @@ layout: default
   <hr><br>
   {% include social_info.html %}
 </article>
+<div class="page-navigation">
+  {% if page.next.url %}
+    <a class="next" href="{{page.next.url}}">&laquo; {{page.next.title}}</a>
+  {% else %}
+    <a></a>
+  {% endif %}
+  {% if page.previous.url %}
+    <a class="prev" href="{{page.previous.url}}">{{page.previous.title}} &raquo;</a>
+  {% endif %}
+</div>
 <!-- 来必力City版安装代码 -->
 <div id="lv-container" data-id="city" data-uid="MTAyMC8zMDYwOS83MTY0">
 <script type="text/javascript">

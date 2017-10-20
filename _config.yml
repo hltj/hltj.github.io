@@ -27,6 +27,7 @@ markdown: kramdown
 theme: minima
 gems:
   - jekyll-feed
+  - jekyll-paginate
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -34,3 +35,5 @@ minima:
   date_format: "%Y-%m-%d"
 excerpt_separator: "<!--more-->"
 lang: "zh-Hans"
+paginate: 20
+paginate_path: "/page/:num"

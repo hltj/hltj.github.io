@@ -29,3 +29,42 @@ blockquote {
   width: -webkit-calc(25% - (#{$spacing-unit} / 2));
   width:         calc(25% - (#{$spacing-unit} / 2));
 }
+
+.page-navigation {
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.page-navigation a {
+  width: 47%;
+  float: left;
+  margin: 1em 0;
+}
+
+.page-navigation .prev {
+  text-align: right;
+}
+
+
+.pagination {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.pagination a {
+  width: 33%;
+  float: left;
+  margin: 1em 0;
+}
+
+.pagination .older {
+  text-align: right;
+}
+
+
+.pagination .rss {
+  font-weight: normal;
+  text-align: center;
+  font-size: $base-font-size;
+  margin: 1em 0;
+}

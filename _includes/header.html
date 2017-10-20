@@ -6,7 +6,7 @@
       .site-nav .menu-icon > svg path { fill: white; }
     </style>
     {% assign default_paths = site.pages | map: "path" %}
-    {% assign page_paths = site.header_pages | default: default_paths %}
+    {% assign page_paths = site.header_pages | default: default_paths | first %}
     <a class="site-title" style="color:white; font-weight: bold;" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
   
     {% if page_paths %}
@@ -23,6 +23,7 @@
         </label>
 
         <div class="trigger">
+          <a class="page-link" style="text-decoration: none">&nbsp;</a>
           {% for path in page_paths %}
             {% assign my_page = site.pages | where: "path", path | first %}
             {% if my_page.title %}
