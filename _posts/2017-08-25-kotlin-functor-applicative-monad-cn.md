@@ -53,7 +53,7 @@ sealed class Maybe<out T> {
 这就轮到 `fmap` 出场了。
 `fmap` 翩翩而来，从容应对上下文。
 `fmap` 知道如何将函数应用到包装在上下文中的值上。
-例如，你想将 `{it + 3}` 应用到 `Just(2)` 上。
+例如，你想将 `{ it + 3 }` 应用到 `Just(2)` 上。
 使用 `fmap` 如下：
 
 ``` kotlin
@@ -100,7 +100,7 @@ fun <T, R> Maybe<T>.fmap(transform: (T) -> R): Maybe<R> = when(this) {
 
 ![](http://adit.io/imgs/functors/fmap_just.png)
 
-那么然后，就像这样，`fmap`，请将 `it + 3` 应用到 `Nothing#` 上如何？
+那么然后，就像这样，`fmap`，请将 `{ it + 3 }` 应用到 `Nothing#` 上如何？
 
 ![](http://adit.io/imgs/functors/fmap_nothing.png)
 
@@ -159,7 +159,7 @@ fun <T, R> Iterable<T>.fmap(transform: (T) -> R): List<R> = this.map(transform)
 好了，好了，最后一个示例：如果将一个函数应用到另一个函数上会发生什么？
 
 ``` kotlin
-{x: Int - > x + 1}.fmap {x: Int -> x + 3}
+{ x: Int - > x + 1 }.fmap { x: Int -> x + 3 }
 ```
 
 这是一个函数：
@@ -174,7 +174,7 @@ fun <T, R> Iterable<T>.fmap(transform: (T) -> R): List<R> = this.map(transform)
 
 ``` kotlin
 > fun <T, U, R> ((T) -> U).fmap(transform: (U) -> R) = { t: T -> transform(this(t)) }
-> val foo = {x: Int -> x + 2}.fmap {x: Int -> x + 3}
+> val foo = { x: Int -> x + 2 }.fmap { x: Int -> x + 3 }
 > foo(10)
 15
 ```
@@ -208,7 +208,7 @@ infix fun <T, R>  Maybe<(T) -> R>.`(*)`(maybe: Maybe<T>): Maybe<R> = when(this) 
     is Maybe.Just -> this.value `($)` maybe
 }
 
-Maybe.Just {x: Int -> x + 3} `(*)` Maybe.Just(2) == Maybe.Just(5)
+Maybe.Just { x: Int -> x + 3 } `(*)` Maybe.Just(2) == Maybe.Just(5)
 ```
 
 使用 `(*)` 可能会带来很多有趣的情况。
@@ -221,7 +221,7 @@ infix fun <T, R>  Iterable<(T) -> R>.`(*)`(iterable: Iterable<T>) = this.flatMap
 有了这个定义，我们可以将一个函数列表应用到一个值列表上：
 
 ``` kotlin
-> listOf<(Int) -> Int>({it * 2}, {it + 3}) `(*)` listOf(1, 2, 3)
+> listOf<(Int) -> Int>({ it * 2 }, { it + 3 }) `(*)` listOf(1, 2, 3)
 [2, 4, 6, 4, 5, 6]
 ```
 
@@ -231,18 +231,18 @@ infix fun <T, R>  Iterable<(T) -> R>.`(*)`(iterable: Iterable<T>) = this.flatMap
 如何将一个接受两个参数的函数应用到两个已包装的值上？
 
 ``` kotlin
-> {y: Int -> {x: Int -> x + y}} `($)` Maybe.Just(5)
-Just(value=(kotlin.Int) -> kotlin.Int) // 等于 `Maybe.Just {x: Int -> x + 5}`
-> Maybe.Just {x: Int -> x + 5} `($)` Maybe.Just(4)
+> { y: Int -> { x: Int -> x + y } } `($)` Maybe.Just(5)
+Just(value=(kotlin.Int) -> kotlin.Int) // 等于 `Maybe.Just { x: Int -> x + 5 }`
+> Maybe.Just { x: Int -> x + 5 } `($)` Maybe.Just(4)
 错误 ？？？ 这究竟是什么意思，这个函数为什么包装在 JUST 中？
 ```
 
 Applicative：
 
 ``` kotlin
-> {y: Int -> {x: Int -> x + y}} `($)` Maybe.Just(5)
-Just(value=(kotlin.Int) -> kotlin.Int) // 等于 `Maybe.Just {x: Int -> x + 5}`
-> Maybe.Just {x: Int -> x + 5} `(*)` Maybe.Just(3)
+> { y: Int -> { x: Int -> x + y } } `($)` Maybe.Just(5)
+Just(value=(kotlin.Int) -> kotlin.Int) // 等于 `Maybe.Just { x: Int -> x + 5 }`
+> Maybe.Just { x: Int -> x + 5 } `(*)` Maybe.Just(3)
 Just(value=8)
 ```
 
@@ -253,7 +253,7 @@ Just(value=8)
 啊啊啊啊啊！”
 
 ``` kotlin
-> {y: Int -> {x: Int -> x + y}} `($)` Maybe.Just(5) `(*)` Maybe.Just(3)
+> { y: Int -> { x: Int -> x + y } } `($)` Maybe.Just(5) `(*)` Maybe.Just(3)
 Just(value=15)
 ```
 
@@ -261,13 +261,13 @@ Just(value=15)
 
 ``` kotlin
 fun <T> ((x: T, y: T) -> T).liftA2(m1: Maybe<T>, m2: Maybe<T>) =
-    {y: T -> {x: T -> this(x, y)}} `($)` m1 `(*)` m2
+    { y: T -> { x: T -> this(x, y) } } `($)` m1 `(*)` m2
 ```
 
 并使用 `liftA2` 做同样事情：
 
 ``` kotlin
-> {x: Int, y: Int -> x * y}.liftA2(Maybe.Just(5), Maybe.Just(3))
+> { x: Int, y: Int -> x * y }.liftA2(Maybe.Just(5), Maybe.Just(3))
 Just(value=15)
 ```
 
@@ -374,9 +374,7 @@ Nothing#
 
 > **注：** Kotlin 内置的空安全语法可以提供类似 monad 的操作，包括链式调用：
 > ``` kotlin
-> fun Int?.half() = this?.let {
->     if (this % 2 == 0) this / 2 else null
-> }
+> fun Int.half() = if (this % 2 == 0) this / 2 else null
 > 
 > val n: Int? = 20
 > n?.half()?.half()?.half()

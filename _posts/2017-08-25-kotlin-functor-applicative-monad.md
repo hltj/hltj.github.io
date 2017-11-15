@@ -56,7 +56,7 @@ When a value is wrapped in a context, you can't apply a normal function to it:
 This is where `fmap` comes in.
 `fmap` is from the street, `fmap` is hip to contexts.
 `fmap` knows how to apply functions to values that are wrapped in a context.
-For example, suppose you want to apply `{it + 3}` to `Just(2)`.
+For example, suppose you want to apply `{ it + 3 }` to `Just(2)`.
 Use `fmap`:
 
 ``` kotlin
@@ -103,7 +103,7 @@ Here's what is happening behind the scenes when we write `Maybe.Just(2).fmap { i
 
 ![](http://adit.io/imgs/functors/fmap_just.png)
 
-So then you're like, alright `fmap`, please apply `it + 3` to a `Nothing#`?
+So then you're like, alright `fmap`, please apply `{ it + 3 }` to a `Nothing#`?
 
 ![](http://adit.io/imgs/functors/fmap_nothing.png)
 
@@ -162,7 +162,7 @@ fun <T, R> Iterable<T>.fmap(transform: (T) -> R): List<R> = this.map(transform)
 Okay, okay, one last example: what happens when you apply a function to another function?
 
 ``` kotlin
-{x: Int - > x + 1}.fmap {x: Int -> x + 3}
+{ x: Int - > x + 1 }.fmap { x: Int -> x + 3 }
 ```
 
 Here's a function:
@@ -177,7 +177,7 @@ The result is just another function!
 
 ``` kotlin
 > fun <T, U, R> ((T) -> U).fmap(transform: (U) -> R) = { t: T -> transform(this(t)) }
-> val foo = {x: Int -> x + 2}.fmap {x: Int -> x + 3}
+> val foo = { x: Int -> x + 2 }.fmap { x: Int -> x + 3 }
 > foo(10)
 15
 ```
@@ -211,7 +211,7 @@ infix fun <T, R>  Maybe<(T) -> R>.`(*)`(maybe: Maybe<T>): Maybe<R> = when(this) 
     is Maybe.Just -> this.value `($)` maybe
 }
 
-Maybe.Just {x: Int -> x + 3} `(*)` Maybe.Just(2) == Maybe.Just(5)
+Maybe.Just { x: Int -> x + 3 } `(*)` Maybe.Just(2) == Maybe.Just(5)
 ```
 
 Using `(*)` can lead to some interesting situations.
@@ -224,7 +224,7 @@ infix fun <T, R>  Iterable<(T) -> R>.`(*)`(iterable: Iterable<T>) = this.flatMap
 With this definition, we can apply a list of functions to a list of values:
 
 ``` kotlin
-> listOf<(Int) -> Int>({it * 2}, {it + 3}) `(*)` listOf(1, 2, 3)
+> listOf<(Int) -> Int>({ it * 2 }, { it + 3 }) `(*)` listOf(1, 2, 3)
 [2, 4, 6, 4, 5, 6]
 ```
 
@@ -234,18 +234,18 @@ Here's something you can do with Applicatives that you can't do with Functors.
 How do you apply a function that takes two arguments to two wrapped values?
 
 ``` kotlin
-> {y: Int -> {x: Int -> x + y}} `($)` Maybe.Just(5)
-Just(value=(kotlin.Int) -> kotlin.Int) // equal to `Maybe.Just {x: Int -> x + 5}`
-> Maybe.Just {x: Int -> x + 5} `($)` Maybe.Just(4)
+> { y: Int -> { x: Int -> x + y } } `($)` Maybe.Just(5)
+Just(value=(kotlin.Int) -> kotlin.Int) // equal to `Maybe.Just { x: Int -> x + 5 }`
+> Maybe.Just { x: Int -> x + 5 } `($)` Maybe.Just(4)
 ERROR ??? WHAT DOES THIS EVEN MEAN WHY IS THE FUNCTION WRAPPED IN A JUST
 ```
 
 Applicatives:
 
 ``` kotlin
-> {y: Int -> {x: Int -> x + y}} `($)` Maybe.Just(5)
-Just(value=(kotlin.Int) -> kotlin.Int) // equal to `Maybe.Just {x: Int -> x + 5}`
-> Maybe.Just {x: Int -> x + 5} `(*)` Maybe.Just(3)
+> { y: Int -> { x: Int -> x + y } } `($)` Maybe.Just(5)
+Just(value=(kotlin.Int) -> kotlin.Int) // equal to `Maybe.Just { x: Int -> x + 5 }`
+> Maybe.Just { x: Int -> x + 5 } `(*)` Maybe.Just(3)
 Just(value=8)
 ```
 
@@ -256,7 +256,7 @@ Then I pass it all wrapped values, and I get a wrapped value out!
 AHAHAHAHAH!"
 
 ``` kotlin
-> {y: Int -> {x: Int -> x + y}} `($)` Maybe.Just(5) `(*)` Maybe.Just(3)
+> { y: Int -> { x: Int -> x + y } } `($)` Maybe.Just(5) `(*)` Maybe.Just(3)
 Just(value=15)
 ```
 
@@ -264,13 +264,13 @@ We can also define another Applicative's function `liftA2`:
 
 ``` kotlin
 fun <T> ((x: T, y: T) -> T).liftA2(m1: Maybe<T>, m2: Maybe<T>) =
-    {y: T -> {x: T -> this(x, y)}} `($)` m1 `(*)` m2
+    { y: T -> { x: T -> this(x, y) } } `($)` m1 `(*)` m2
 ```
 
 And using `liftA2` do the same thing:
 
 ``` kotlin
-> {x: Int, y: Int -> x * y}.liftA2(Maybe.Just(5), Maybe.Just(3))
+> { x: Int, y: Int -> x * y }.liftA2(Maybe.Just(5), Maybe.Just(3))
 Just(value=15)
 ```
 
@@ -377,9 +377,7 @@ Nothing#
 
 > **Note:** The built-in null safety syntax of Kotlin can provide monad-like operations including chaining the calls:
 > ``` kotlin
-> fun Int?.half() = this?.let {
->     if (this % 2 == 0) this / 2 else null
-> }
+> fun Int.half() = if (this % 2 == 0) this / 2 else null
 > 
 > val n: Int? = 20
 > n?.half()?.half()?.half()
