@@ -11,23 +11,23 @@ categories: kotlin
 
 这是一个简单的值：
 
-![](http://adit.io/imgs/functors/value.png)
+![](/assets/fam/value.png)
 
 我们也知道如何将一个函数应用到这个值上：
 
-![](http://adit.io/imgs/functors/value_apply.png)
+![](/assets/fam/value_apply.png)
 
 这很简单。
 那么扩展一下，我们说任何值都可以放到一个上下文中。
 现在你可以把上下文想象为一个可以在其中装进值的盒子：
 
-![](http://adit.io/imgs/functors/value_and_context.png)
+![](/assets/fam/value_and_context.png)
 
 现在，将一个函数应用到这个值上时，会**根据上下文的不同**而得到不同的结果。
 这就是 Functor、 Applicative、 Monad、 Arrow 等概念的基础。
 ``Maybe`` 数据类型定义了两种相关上下文：
 
-![](http://adit.io/imgs/functors/context.png)
+![](/assets/fam/context.png)
 
 ``` kotlin
 sealed class Maybe<out T> {
@@ -48,7 +48,7 @@ sealed class Maybe<out T> {
 
 当一个值被包装在上下文中时，你无法将一个普通函数应用给它：
 
-![](http://adit.io/imgs/functors/no_fmap_ouch.png)
+![](/assets/fam/no_fmap_ouch.png)
 
 这就轮到 `fmap` 出场了。
 `fmap` 翩翩而来，从容应对上下文。
@@ -61,7 +61,7 @@ sealed class Maybe<out T> {
 Just(value=5)
 ```
 
-![](http://adit.io/imgs/functors/fmap_apply.png)
+![](/assets/fam/fmap_apply.png)
 
 **嘭！**
 `fmap` 向我们展示了它的成果。
@@ -72,12 +72,12 @@ Just(value=5)
 在 Haskell 中 `Functor` 是一个[类型类](https://learnyoua.haskell.sg/content/zh-cn/ch03/type-and-typeclass.html#typeclasses入门)。
 其定义如下：
 
-![](http://adit.io/imgs/functors/functor_def.png)
+![](/assets/fam/functor_def.png)
 
 在 Kotlin 中，可以认为 `Functor` 是一种定义了 `fmap` 方法/扩展函数的类型。
 以下是 `fmap` 的工作原理：
 
-![](http://adit.io/imgs/functors/fmap_def.png)
+![](/assets/fam/fmap_def.png)
 
 所以我们可以这么做：
 
@@ -98,11 +98,11 @@ fun <T, R> Maybe<T>.fmap(transform: (T) -> R): Maybe<R> = when(this) {
 
 当我们写 `Maybe.Just(2).fmap { it + 3 }` 时，这是幕后发生的事情：
 
-![](http://adit.io/imgs/functors/fmap_just.png)
+![](/assets/fam/fmap_just.png)
 
 那么然后，就像这样，`fmap`，请将 `{ it + 3 }` 应用到 `Nothing#` 上如何？
 
-![](http://adit.io/imgs/functors/fmap_nothing.png)
+![](/assets/fam/fmap_nothing.png)
 
 ``` kotlin
 > Maybe.`Nothing#`.fmap { x: Int -> x + 3 }
@@ -111,7 +111,7 @@ Nothing#
 
 > **注：** 这里该 lambda 表达式的参数必须显式标注类型，因为 Kotlin 中有很多类型可以与整数（`Int`）相加。
 
-![Bill O'Reilly 可是完全不了解 Maybe functor 哦](http://adit.io/imgs/functors/bill.png)
+![Bill O'Reilly 可是完全不了解 Maybe functor 哦](/assets/fam/bill.png)
 
 就像《黑客帝国》中的 Morpheus，`fmap` 知道都要做什么；如果你从 `Nothing#` 开始，那么你会以 `Nothing#` 结束！
 `fmap` 是禅道。
@@ -147,7 +147,7 @@ infix fun <T, R> ((T) -> R).`($)`(maybe: Maybe<T>) = maybe.fmap(this)
 
 再看一个示例：如果将一个函数应用到一个 `Iterable`（Haksell 中是 `List`）上会发生什么？
 
-![](http://adit.io/imgs/functors/fmap_list.png)
+![](/assets/fam/fmap_list.png)
 
 `Iterable` 也是 functor！
 我们可以为其定义 `fmap` 如下：
@@ -164,11 +164,11 @@ fun <T, R> Iterable<T>.fmap(transform: (T) -> R): List<R> = this.map(transform)
 
 这是一个函数：
 
-![](http://adit.io/imgs/functors/function_with_value.png)
+![](/assets/fam/function_with_value.png)
 
 这是一个应用到另一个函数上的函数：
 
-![](http://adit.io/imgs/functors/fmap_function.png)
+![](/assets/fam/fmap_function.png)
 
 其结果是又一个函数！
 
@@ -187,18 +187,18 @@ fun <T, R> Iterable<T>.fmap(transform: (T) -> R): List<R> = this.map(transform)
 Applicative 又提升了一个层次。
 对于 Applicative，我们的值像 Functor 一样包装在一个上下文中：
 
-![](http://adit.io/imgs/functors/value_and_context.png)
+![](/assets/fam/value_and_context.png)
 
 但是我们的函数也包装在一个上下文中！
 
-![](http://adit.io/imgs/functors/function_and_context.png)
+![](/assets/fam/function_and_context.png)
 
 嗯。
 我们继续深入。
 Applicative 并没有开玩笑。
 Applicative 定义了 `(*)`（在 Haskell 中是 `<*>`），它知道如何将一个 _包装在上下文中的_ 函数应用到一个 _包装在上下文中的_ 值上：
 
-![](http://adit.io/imgs/functors/applicative_just.png)
+![](/assets/fam/applicative_just.png)
 
 即：
 
@@ -225,7 +225,7 @@ infix fun <T, R>  Iterable<(T) -> R>.`(*)`(iterable: Iterable<T>) = this.flatMap
 [2, 4, 6, 4, 5, 6]
 ```
 
-![](http://adit.io/imgs/functors/applicative_list.png)
+![](/assets/fam/applicative_list.png)
 
 这里有 Applicative 能做到而 Functor 不能做到的事情。
 如何将一个接受两个参数的函数应用到两个已包装的值上？
@@ -281,11 +281,11 @@ Monad 增加了一个新的转变。
 
 Functor 将一个函数应用到一个已包装的值上：
 
-![](http://adit.io/imgs/functors/fmap.png)
+![](/assets/fam/fmap.png)
 
 Applicative 将一个已包装的函数应用到一个已包装的值上：
 
-![](http://adit.io/imgs/functors/applicative.png)
+![](/assets/fam/applicative.png)
 
 Monad 将一个**返回已包装值**的函数应用到一个已包装的值上。
 Monad 有一个函数 `))=`（在 Haskell 中是 `>>=`，读作“绑定”）来做这个。
@@ -293,7 +293,7 @@ Monad 有一个函数 `))=`（在 Haskell 中是 `>>=`，读作“绑定”）�
 让我们来看个示例。
 老搭档 `Maybe` 是一个 monad：
 
-![正是闲逛的 monad](http://adit.io/imgs/functors/context.png)
+![正是闲逛的 monad](/assets/fam/context.png)
 
 假设 `half` 是一个只适用于偶数的函数：
 
@@ -304,16 +304,16 @@ fun half(x: Int) = if (x % 2 == 0)
                        Maybe.`Nothing#`
 ```
 
-![](http://adit.io/imgs/functors/half.png)
+![](/assets/fam/half.png)
 
 如果我们喂给它一个已包装的值呢？
 
-![](http://adit.io/imgs/functors/half_ouch.png)
+![](/assets/fam/half_ouch.png)
 
 我们需要使用 `))=` 来将我们已包装的值塞进该函数。
 这是 `))=` 的照片：
 
-![](http://adit.io/imgs/functors/plunger.jpg)
+![](/assets/fam/plunger.jpg)
 
 以下是它的工作方式：
 
@@ -337,7 +337,7 @@ class Monad m where
 
 其中 `>>=` 是：
 
-![](http://adit.io/imgs/functors/bind_def.png)
+![](/assets/fam/bind_def.png)
 
 在 Kotlin 中，可以认为 `Monad` 是一种定义了这样中缀函数的类型：
 
@@ -356,11 +356,11 @@ infix fun <T, R> Maybe<T>.`))=`(f: ((T) -> Maybe<R>)): Maybe<R> = when(this) {
 
 这是与 `Just(3)` 互动的情况！
 
-![](http://adit.io/imgs/functors/monad_just.png)
+![](/assets/fam/monad_just.png)
 
 如果传入一个 `Nothing#` 就更简单了：
 
-![](http://adit.io/imgs/functors/monad_nothing.png)
+![](/assets/fam/monad_nothing.png)
 
 你还可以将这些调用串联起来：
 
@@ -369,8 +369,8 @@ infix fun <T, R> Maybe<T>.`))=`(f: ((T) -> Maybe<R>)): Maybe<R> = when(this) {
 Nothing#
 ```
 
-![](http://adit.io/imgs/functors/monad_chain.png)
-![](http://adit.io/imgs/functors/whoa.png)
+![](/assets/fam/monad_chain.png)
+![](/assets/fam/whoa.png)
 
 > **注：** Kotlin 内置的空安全语法可以提供类似 monad 的操作，包括链式调用：
 > ``` kotlin
@@ -385,7 +385,7 @@ Nothing#
 
 现在我们来看看另一个例子：`IO` monad：
 
-![](http://adit.io/imgs/functors/io.png)
+![](/assets/fam/io.png)
 
 > **注：** 由于 Kotlin 并不区分纯函数与非纯函数，因此根本不需要 IO monad。
 > 这只是一个模拟：
@@ -398,7 +398,7 @@ Nothing#
 具体来看三个函数。
 `getLine` 没有参数并会获取用户输入：
 
-![](http://adit.io/imgs/functors/getLine.png)
+![](/assets/fam/getLine.png)
 
 ``` kotlin
 fun getLine(): IO<String> = IO(readLine() ?: "")
@@ -406,7 +406,7 @@ fun getLine(): IO<String> = IO(readLine() ?: "")
 
 `readFile` 接受一个字符串（文件名）并返回该文件的内容：
 
-![](http://adit.io/imgs/functors/readFile.png)
+![](/assets/fam/readFile.png)
 
 ``` kotlin
 typealias FilePath = String
@@ -416,7 +416,7 @@ fun readFile(filename: FilePath): IO<String> = IO(File(filename).readText())
 
 `putStrLn` 接受一个字符串并输出之：
 
-![](http://adit.io/imgs/functors/putStrLn.png)
+![](/assets/fam/putStrLn.png)
 
 ``` kotlin
 fun putStrLn(str: String): IO<Unit> = IO(println(str))
@@ -425,7 +425,7 @@ fun putStrLn(str: String): IO<Unit> = IO(println(str))
 所有这三个函数都接受普通值（或无值）并返回一个已包装的值。
 我们可以使用 `))=` 将它们串联起来！
 
-![](http://adit.io/imgs/functors/monad_io.png)
+![](/assets/fam/monad_io.png)
 
 ``` kotlin
 getLine() `))=` ::readFile `))=` ::putStrLn
@@ -462,7 +462,7 @@ val foo = `do` {
 
 这三者有什么区别呢？
 
-![](http://adit.io/imgs/functors/recap.png)
+![](/assets/fam/recap.png)
 
   * **functor:** 可通过 `fmap` 或者 `($)` 将一个函数应用到一个已包装的值上。
   * **applicative:** 可通过 `(*)` 或者 `liftA` 将一个已包装的函数应用到已包装的值上。

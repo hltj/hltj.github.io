@@ -14,23 +14,23 @@ categories: kotlin
 
 Here's a simple value:
 
-![](http://adit.io/imgs/functors/value.png)
+![](/assets/fam/value.png)
 
 And we know how to apply a function to this value:
 
-![](http://adit.io/imgs/functors/value_apply.png)
+![](/assets/fam/value_apply.png)
 
 Simple enough.
 Lets extend this by saying that any value can be in a context.
 For now you can think of a context as a box that you can put a value in:
 
-![](http://adit.io/imgs/functors/value_and_context.png)
+![](/assets/fam/value_and_context.png)
 
 Now when you apply a function to this value, you'll get different results **depending on the context**.
 This is the idea that Functors, Applicatives, Monads, Arrows etc are all based on.
 The `Maybe` data type defines two related contexts:
 
-![](http://adit.io/imgs/functors/context.png)
+![](/assets/fam/context.png)
 
 ``` kotlin
 sealed class Maybe<out T> {
@@ -51,7 +51,7 @@ First let's talk about Functors!
 
 When a value is wrapped in a context, you can't apply a normal function to it:
 
-![](http://adit.io/imgs/functors/no_fmap_ouch.png)
+![](/assets/fam/no_fmap_ouch.png)
 
 This is where `fmap` comes in.
 `fmap` is from the street, `fmap` is hip to contexts.
@@ -64,7 +64,7 @@ Use `fmap`:
 Just(value=5)
 ```
 
-![](http://adit.io/imgs/functors/fmap_apply.png)
+![](/assets/fam/fmap_apply.png)
 
 **Bam!**
 `fmap` shows us how it's done!
@@ -75,12 +75,12 @@ But how does `fmap` know how to apply the function?
 `Functor` is a [typeclass](http://learnyouahaskell.com/types-and-typeclasses#typeclasses-101) in Haskell.
 Here's the definition:
 
-![](http://adit.io/imgs/functors/functor_def.png)
+![](/assets/fam/functor_def.png)
 
 In Kotlin, `Functor` can be considered as a type that defines `fmap` method/extension function.
 Here's how `fmap` works:
 
-![](http://adit.io/imgs/functors/fmap_def.png)
+![](/assets/fam/fmap_def.png)
 
 So we can do this:
 
@@ -101,11 +101,11 @@ fun <T, R> Maybe<T>.fmap(transform: (T) -> R): Maybe<R> = when(this) {
 
 Here's what is happening behind the scenes when we write `Maybe.Just(2).fmap { it + 3 }`:
 
-![](http://adit.io/imgs/functors/fmap_just.png)
+![](/assets/fam/fmap_just.png)
 
 So then you're like, alright `fmap`, please apply `{ it + 3 }` to a `Nothing#`?
 
-![](http://adit.io/imgs/functors/fmap_nothing.png)
+![](/assets/fam/fmap_nothing.png)
 
 ``` kotlin
 > Maybe.`Nothing#`.fmap { x: Int -> x + 3 }
@@ -114,7 +114,7 @@ Nothing#
 
 > **Note:** Here the argument type of the lambda must be annotated explicitly, since there are many types can plus a `Int` in Kotlin.
 
-![Bill O'Reilly being totally ignorant about the Maybe functor](http://adit.io/imgs/functors/bill.png)
+![Bill O'Reilly being totally ignorant about the Maybe functor](/assets/fam/bill.png)
 
 Like Morpheus in the Matrix, `fmap` knows just what to do; you start with `Nothing#`, and you end up with `Nothing#`!
 `fmap` is zen.
@@ -150,7 +150,7 @@ infix fun <T, R> ((T) -> R).`($)`(maybe: Maybe<T>) = maybe.fmap(this)
 
 Here's another example: what happens when you apply a function to a `Iterable`(`List` in Haskell)?
 
-![](http://adit.io/imgs/functors/fmap_list.png)
+![](/assets/fam/fmap_list.png)
 
 `Iterable`s are functors too!
 We can define the `fmap` for them:
@@ -167,11 +167,11 @@ Okay, okay, one last example: what happens when you apply a function to another 
 
 Here's a function:
 
-![](http://adit.io/imgs/functors/function_with_value.png)
+![](/assets/fam/function_with_value.png)
 
 Here's a function applied to another function:
 
-![](http://adit.io/imgs/functors/fmap_function.png)
+![](/assets/fam/fmap_function.png)
 
 The result is just another function!
 
@@ -190,18 +190,18 @@ When you use fmap on a function, you're just doing function composition!
 Applicatives take it to the next level.
 With an applicative, our values are wrapped in a context, just like Functors:
 
-![](http://adit.io/imgs/functors/value_and_context.png)
+![](/assets/fam/value_and_context.png)
 
 But our functions are wrapped in a context too!
 
-![](http://adit.io/imgs/functors/function_and_context.png)
+![](/assets/fam/function_and_context.png)
 
 Yeah.
 Let that sink in.
 Applicatives don't kid around.
 Applicative defines `(*)` (`<*>` in Haskell), which knows how to apply a function _wrapped in a context_ to a value _wrapped in a context_:
 
-![](http://adit.io/imgs/functors/applicative_just.png)
+![](/assets/fam/applicative_just.png)
 
 i.e:
 
@@ -228,7 +228,7 @@ With this definition, we can apply a list of functions to a list of values:
 [2, 4, 6, 4, 5, 6]
 ```
 
-![](http://adit.io/imgs/functors/applicative_list.png)
+![](/assets/fam/applicative_list.png)
 
 Here's something you can do with Applicatives that you can't do with Functors.
 How do you apply a function that takes two arguments to two wrapped values?
@@ -284,11 +284,11 @@ Monads add a new twist.
 
 Functors apply a function to a wrapped value:
 
-![](http://adit.io/imgs/functors/fmap.png)
+![](/assets/fam/fmap.png)
 
 Applicatives apply a wrapped function to a wrapped value:
 
-![](http://adit.io/imgs/functors/applicative.png)
+![](/assets/fam/applicative.png)
 
 Monads apply a function **that returns a wrapped value** to a wrapped value.
 Monads have a function `))=` (`>>=` in Haskell, pronounced "bind") to do this.
@@ -296,7 +296,7 @@ Monads have a function `))=` (`>>=` in Haskell, pronounced "bind") to do this.
 Let's see an example.
 Good ol' `Maybe` is a monad:
 
-![Just a monad hanging out](http://adit.io/imgs/functors/context.png)
+![Just a monad hanging out](/assets/fam/context.png)
 
 Suppose `half` is a function that only works on even numbers:
 
@@ -307,16 +307,16 @@ fun half(x: Int) = if (x % 2 == 0)
                        Maybe.`Nothing#`
 ```
 
-![](http://adit.io/imgs/functors/half.png)
+![](/assets/fam/half.png)
 
 What if we feed it a wrapped value?
 
-![](http://adit.io/imgs/functors/half_ouch.png)
+![](/assets/fam/half_ouch.png)
 
 We need to use `))=` to shove our wrapped value into the function.
 Here's a photo of `))=`:
 
-![](http://adit.io/imgs/functors/plunger.jpg)
+![](/assets/fam/plunger.jpg)
 
 Here's how it works:
 
@@ -340,7 +340,7 @@ class Monad m where
 
 Where `>>=` is:
 
-![](http://adit.io/imgs/functors/bind_def.png)
+![](/assets/fam/bind_def.png)
 
 In Kotlin, `Monad` can be considered as a type that defines such a infix function:
 
@@ -359,11 +359,11 @@ infix fun <T, R> Maybe<T>.`))=`(f: ((T) -> Maybe<R>)): Maybe<R> = when(this) {
 
 Here it is in action with a `Just(3)`!
 
-![](http://adit.io/imgs/functors/monad_just.png)
+![](/assets/fam/monad_just.png)
 
 And if you pass in a `Nothing#` it's even simpler:
 
-![](http://adit.io/imgs/functors/monad_nothing.png)
+![](/assets/fam/monad_nothing.png)
 
 You can also chain these calls:
 
@@ -372,8 +372,8 @@ You can also chain these calls:
 Nothing#
 ```
 
-![](http://adit.io/imgs/functors/monad_chain.png)
-![](http://adit.io/imgs/functors/whoa.png)
+![](/assets/fam/monad_chain.png)
+![](/assets/fam/whoa.png)
 
 > **Note:** The built-in null safety syntax of Kotlin can provide monad-like operations including chaining the calls:
 > ``` kotlin
@@ -388,7 +388,7 @@ So now we know that `Maybe` is a `Functor`, an `Applicative`, and a `Monad`.
 
 Now let's mosey on over to another example: the `IO` monad:
 
-![](http://adit.io/imgs/functors/io.png)
+![](/assets/fam/io.png)
 
 > **Note:** Since Kotlin doesn't distinguish between pure and impure function, it doesn't need IO monad at all.
 > This is just a emulation:
@@ -401,7 +401,7 @@ Now let's mosey on over to another example: the `IO` monad:
 Specifically three functions.
 `getLine` takes no arguments and gets user input:
 
-![](http://adit.io/imgs/functors/getLine.png)
+![](/assets/fam/getLine.png)
 
 ``` kotlin
 fun getLine(): IO<String> = IO(readLine() ?: "")
@@ -409,7 +409,7 @@ fun getLine(): IO<String> = IO(readLine() ?: "")
 
 `readFile` takes a string (a filename) and returns that file's contents:
 
-![](http://adit.io/imgs/functors/readFile.png)
+![](/assets/fam/readFile.png)
 
 ``` kotlin
 typealias FilePath = String
@@ -419,7 +419,7 @@ fun readFile(filename: FilePath): IO<String> = IO(File(filename).readText())
 
 `putStrLn` takes a string and prints it:
 
-![](http://adit.io/imgs/functors/putStrLn.png)
+![](/assets/fam/putStrLn.png)
 
 ``` kotlin
 fun putStrLn(str: String): IO<Unit> = IO(println(str))
@@ -428,7 +428,7 @@ fun putStrLn(str: String): IO<Unit> = IO(println(str))
 All three functions take a regular value (or no value) and return a wrapped value.
 We can chain all of these using `))=`!
 
-![](http://adit.io/imgs/functors/monad_io.png)
+![](/assets/fam/monad_io.png)
 
 ``` kotlin
 getLine() `))=` ::readFile `))=` ::putStrLn
@@ -465,7 +465,7 @@ val foo = `do` {
 
 What is the difference between the three?
 
-![](http://adit.io/imgs/functors/recap.png)
+![](/assets/fam/recap.png)
 
   * **functors:** you apply a function to a wrapped value using `fmap` or `($)`
   * **applicatives:** you apply a wrapped function to a wrapped value using `(*)` or `liftA`
