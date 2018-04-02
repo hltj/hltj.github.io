@@ -402,18 +402,6 @@ Maven/Gradle 项目使用 JDK 9 编译都不成问题，使用 Gradle 4.1 到 4.
 ## 性能提升的示例
 以之前在[由“千万字母表问题”看多范式编程语言](https://hltj.me/lang/2016/11/07/10m-letters.html)中的 Java 代码为例，使用 Java 9 运行的效率相对 Java 8 有显著提升。以下是我分别在不同环境中运行三次取中位数的结果：
 
-<style>
-table {
- border-collapse: collapse;
- margin-bottom: 15px;
-}
-td, th {
- border: 1px grey solid;
- border-spacing: 0;
- padding: 5px;
-}
-</style>
-
 | 　          | Java 8  | Java 9 |
 |-------------|--------:|-------:|
 | 某云主机    |  6.495s | 3.706s |

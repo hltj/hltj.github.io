@@ -217,18 +217,6 @@ demo1.groovy: 10: [Static type checking] - Cannot find matching method demo1#pri
 ### REPL
 通常静态类型语言都是编译型语言，编译构建是静态类型语言相对动态类型语言比较麻烦的问题之一，尤其是需要只写几行代码试验效果的时候。现代静态类型语言为这一场景提供了交互式编程环境，即 REPL（Read-Eval-Print Loop），这在小段代码测试或者实验驱动开发中非常有用。下表列举了一些现代静态类型语言的 REPL，其中**粗体**表示官方提供。
 
-<style>
-table {
- border-collapse: collapse;
- margin-bottom: 15px;
-}
-td, th {
- border: 1px grey solid;
- border-spacing: 0;
- padding: 5px;
-}
-</style>
-
 | 语言         | REPL |
 |--------------|------|
 | Kotlin       | **kotlinc** |
