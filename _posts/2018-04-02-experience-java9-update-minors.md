@@ -478,6 +478,6 @@ jshell> ProcessHandle.current().info().totalCpuDuration()
 $5 ==> Optional[PT0.81S]
 ```
 
-关于这些新特性的更想多细节请参见官方文档。
+关于这些新特性的更多细节请参见官方文档。
 
 本系列未完待续。
