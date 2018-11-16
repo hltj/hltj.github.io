@@ -30,4 +30,8 @@ th img { margin: 0 10px 0 10px; }
   - [https://www.gitbook.com/book/hltj/kotlin-reference-chinese/details](https://www.gitbook.com/book/hltj/kotlin-reference-chinese/details)
   - Kotlin 官方参考文档 中文版
 
+#### ![ktor.png](/assets/ktor.png) Ktor 框架中文站
+  - [https://ktor.kotlincn.net/](https://ktor.kotlincn.net/)
+  - Kotlin 框架官方站的中文翻译
+
 {% include social_info.html %}
