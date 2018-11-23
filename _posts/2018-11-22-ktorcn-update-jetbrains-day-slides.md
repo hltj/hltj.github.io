@@ -6,6 +6,8 @@ categories: kotlin
 ---
 非常值得庆祝的是，[Ktor 1.0 正式发布了](https://www.kotliner.cn/2018/11/ktor-1-0/)，[Ktor 中文站](https://ktor.kotlincn.net/)也已更新。
 
+![](/assets/kotlin/ktorcn.png)
+
 Ktor 是 [JetBrains](https://www.jetbrains.com/) 官方出品的互联应用框架。
 使用该框架非常易于开发异步的服务器与客户端，并且能够充分利用 [Kotlin](https://www.kotlincn.net/) 以及[协程](https://www.kotlincn.net/docs/reference/coroutines/coroutines-guide.html)的优势。
 
