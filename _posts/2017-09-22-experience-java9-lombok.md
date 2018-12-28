@@ -6,6 +6,9 @@ categories: java
 ---
 Java 9 正式版已于当地时间的 9 月 21 日（北京时间大约是今天凌晨）如期发布。可[在 Oracle 官网下载](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html)。
 <!--more-->
+> 2018-12-28 注：Java 9 是一个短期版本，目前的长期支持（LTS）版是 Java 11。
+> 而 Java 10 与 Java 11 自身的改动都不多，可以说 Java 11 相对于上一个 LTS 版（Java 8）的新特性很多都是 Java 9 引入的。因此本文仍有参考价值。
+> 上述下载链接已失效，一些示例可以直接使用 Java 11 来演练，或者用[历史版本的 OpenJDK](https://jdk.java.net/archive/)（不推荐）。
 
 Java 9 没有像 Java 5/Java 8 那样引入新的编程范式而给语言本身带来革命性的改进，不过 Java 9 的改动还是很大的，尤其是引入模块化对 JDK 与运行时的改动都很大。
 现在网上能找到很多介绍 Java 9 新特性的文章，这里不再赘述，只简要列举如下：

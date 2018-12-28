@@ -9,6 +9,9 @@ categories: java
 ## 更新
 Java 9 已经正式发布半年多了。这期间不仅 Java 9 发布了更新，就连 Java 10 也已正式发布。[上一篇](https://hltj.me/java/2017/09/22/experience-java9-lombok.html)中提到的工具也都有更新。其中 IDEA 新版改进了不少 Java 9 支持，Eclipse 新版内置了 Java 9 支持（不再需要 Beta 版插件，但可能需要重装，不能直接从旧版升级）。最值得一提的是 lombok 1.16.20 发布。
 <!--more-->
+> 2018-12-28 注：Java 9 与 Java 10 都是短期版本，目前的长期支持（LTS）版是 Java 11。
+> 而 Java 10 与 Java 11 自身的改动都不多，可以说 Java 11 相对于上一个 LTS 版（Java 8）的新特性很多都是 Java 9 引入的。因此本文仍有参考价值。
+> Oracle 已经不提供 JDK 9 下载，一些示例可以直接使用 Java 11 来演练，或者用[历史版本的 OpenJDK](https://jdk.java.net/archive/)（不推荐）。
 
 ### Lombok 兼容性改善
 期待已久的 lombok 1.16.20 终于在 2018-01-09 正式发布。这一版解决了[上一篇](https://hltj.me/java/2017/09/22/experience-java9-lombok.html)中提到的大多数兼容问题。具体如下：
