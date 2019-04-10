@@ -122,7 +122,7 @@ Julia 是定位于科学计算、数据统计等数值计算领域的现代语�
 与 Python 3 不同，Julia 会针对类型标注做运行时校验，同样以一个只输出整数的函数为例：
 
 ``` julia
-function print_int(i::Int)::Void
+function print_int(i::Int)::Nothing
     print(i)
 end
 ```
@@ -136,9 +136,8 @@ end
 ### Hack 的严格模式
 Hack 是 Facebook 开源的一门动态语言，保留了对 PHP 的良好兼容性的同时，引入了对静态类型的支持。与 Python 3、Julia 类似，Hack 同样支持类型标注。不同的是 Hack 的运行时 HHVM 对于以 `<?hh` 开头 Hack 语言文件（HHVM 也支持以 `<?php` 开头的 PHP 语言文件）会要求首先运行类型检查工具，以便在运行前发现问题。继续以输出整数的代码为例，Hack 代码需要用严格模式才能检测出问题。
 
-Hack 语言的严格模式不允许调用传统 PHP 代码或非严格 Hack 代码，要求所有代码进行类型标注，并且除了 require 语句、函数与类声明之外不允许有其他顶层代码。因此输出整数的 Hack 代码需要分成两个文件来写：
+Hack 语言的严格模式不允许调用传统 PHP 代码或非严格 Hack 代码，要求所有代码进行类型标注，并且除了 require 语句、函数与类声明之外不允许有其他顶层代码。严格模式代码以 `<?hh // strict` 开头：
 
-a.hh —— 严格模式代码，以 `<?hh // strict` 开头
 ``` php
 <?hh // strict
 
@@ -146,18 +145,12 @@ function print_int(int $i): void {
     echo $i;
 }
 
-function main(): void {
+<<__EntryPoint>>
+function main(): noreturn {
     print_int(5);
     print_int("hello");
+    exit(0);
 }
-```
-
-b.hh —— 非严格模式，可以在顶层调用严格模式代码，用于执行 `main` 函数。
-
-``` php
-<?hh
-
-main();
 ```
 
 上述代码，在运行类型检查工具时，会报以下错误：
@@ -167,9 +160,13 @@ main();
 当然，检查过后就可以运行相应代码了。虽然检查到了错误，仍然可以忽略之继续任性运行。运行同样会报运行时错误：
 
 ``` txt
-sh-4.2$ hhvm b.hh
-
-Catchable fatal error: Hack type error: Invalid argument at /tmp/a.hh line 9
+sh-4.2$ hhvm a.hh
+5
+Fatal error: Uncaught TypeError: Argument 1 passed to print_int() must be an instance of int, string given in /user/a.hh:5
+Stack trace:
+#0 /user/a.hh(10): print_int()
+#1 (): main()
+#2 {main}
 ```
 
 Hack 的检查工具还能做类型检查之外一些其他静态分析。与 Julia 类似，HHVM 也会在 JIT 中利用类型信息来改善性能。
@@ -208,7 +205,7 @@ demo1.groovy: 10: [Static type checking] - Cannot find matching method demo1#pri
 ```
 
 ### 其他
-除此之外，混合类型语言还有 Dart、Perl 6 等；在动态类型语言里基础上引入静态类型的还有著名的 TypeScript 语言，以及一堆带有 Typed 前缀的语言，如 Typed Racket、Typed Clojure、Type Scheme、Typed Lua 等等。可见静态类型对于动态类型语言也是一个重要补充。
+除此之外，混合类型语言还有 Dart 1、Perl 6 等；在动态类型语言里基础上引入静态类型的还有著名的 TypeScript 语言，以及一堆带有 Typed 前缀的语言，如 Typed Racket、Typed Clojure、Type Scheme、Typed Lua 等等。可见静态类型对于动态类型语言也是一个重要补充。
 
 动态类型的出发点主要是省却类型声明让代码更简洁、编码更便利，另外还能让同样的代码可适用于多种不同类型（鸭子类型）。相比之下传统的 C、Java 以及传统 C++ 等静态类型语言却很麻烦，需要写不少样板代码。而这些问题在现代静态类型语言中已经有明显改善，它们能够提供近乎动态类型语言的简洁便利性的同时，还能确保性能、类型安全以及良好的工具支持。接下来我们就看下静态语言的改善之处吧。
 
@@ -222,12 +219,14 @@ demo1.groovy: 10: [Static type checking] - Cannot find matching method demo1#pri
 | Kotlin       | **kotlinc** |
 | Swift        | **swift** |
 | Rust         | irust rusti |
-| F#           | **fsi** |
 | Haskell      | **ghci** |
+| F#           | **fsharpi fsi** |
+| C#           | **csharp csi** |
 | Scala        | **scala** |
 | 现代 C++ [^1] | cling |
+| Java 10+     | **jshell** |
 
-[^1]: 现代 C++，即 C++ 11 及其后版本（如 C++14、C++17 等）的 C++。
+[^1]: 现代 C++，即 C++ 11 及其后版本（如 C++ 14、C++ 17 等）的 C++。
 
 ### 类型推断
 与 C 语言以及传统的 C++/Java 不同，（包括现代 C++ 在内的）现代的静态类型语言可以在很多地方省却显式类型标注，编译器能够从相应的上下文来推断出变量/表达式的类型，这一机制称为类型推断（type inference）。静态类型语言的这一机制让变量声明像动态类型语言一样简洁，例如：
@@ -339,7 +338,7 @@ let max' a b = if (a < b) then b else a
 
 在 F# 中还可以用成员函数/属性作为泛型约束，可以说是类型安全的鸭子类型：
 
-``` f#
+``` fsharp
 type A() =
     member this.info = "I'm A.";;
 
@@ -359,5 +358,14 @@ B() |> printInfo;;
 静态类型具有很多优势，对于动态类型语言同样有积极意义。
 现代静态类型语言在不断改进其简洁性与便利性，与动态类型语言的差距在缩小，因此更加亲民，近年来有很多现代静态类型语言兴起与流行。
 另外由于静态类型的优势，很多动态类型语言也在引入静态类型支持。可见静态类型是现代语言发展的一个趋势。
+
+> ### 修订记录
+> 2019-04-10：
+>  - 补充 F# REPL
+>  - 增加 C#、Java 10+ REPL
+>  - Julia 代码语法更新到 Julia 1.1
+>  - Hack 代码用法更新到 HHVM 4.0.4
+>  - Dart 混合类型只限 Dart 1
+>  - 修正 F# 代码语法高亮
 
 ---
