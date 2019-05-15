@@ -224,9 +224,10 @@ demo1.groovy: 10: [Static type checking] - Cannot find matching method demo1#pri
 | C#           | **csharp csi** |
 | Scala        | **scala** |
 | 现代 C++ [^1] | cling |
-| Java 10+     | **jshell** |
+| Java         | **jshell**[^2] javarepl |
 
 [^1]: 现代 C++，即 C++ 11 及其后版本（如 C++ 14、C++ 17 等）的 C++。
+[^2]: Java 9 起提供 jshell。
 
 ### 类型推断
 与 C 语言以及传统的 C++/Java 不同，（包括现代 C++ 在内的）现代的静态类型语言可以在很多地方省却显式类型标注，编译器能够从相应的上下文来推断出变量/表达式的类型，这一机制称为类型推断（type inference）。静态类型语言的这一机制让变量声明像动态类型语言一样简洁，例如：
@@ -362,10 +363,13 @@ B() |> printInfo;;
 > ### 修订记录
 > 2019-04-10：
 >  - 补充 F# REPL
->  - 增加 C#、Java 10+ REPL
+>  - 增加 C#、Java REPL
 >  - Julia 代码语法更新到 Julia 1.1
 >  - Hack 代码用法更新到 HHVM 4.0.4
 >  - Dart 混合类型只限 Dart 1
 >  - 修正 F# 代码语法高亮
+> 
+> 2019-05-15：
+>  - Java REPL 小修正及补充
 
 ---
