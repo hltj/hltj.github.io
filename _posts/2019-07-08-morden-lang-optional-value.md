@@ -51,7 +51,7 @@ val c: Int? = null // OK，c 是可空类型
 
 val d: Int = a // OK
 val e: Int? = a // OK，非空表达式可以赋给可空变量
-val f: Int = c // 错误，e 不接受可空表达式赋值
+val f: Int = c // 错误，f 不接受可空表达式赋值
 val g: Int? = c // OK
 val h = c // OK，h 的类型会推断为 Int?
 ```
@@ -65,8 +65,8 @@ function b(): int { return null; } // 错误
 function c(): ?int { return null; }
 function d(): int { return a(); }
 function e(): ?int { return a(); }
-function f(): int { return c(); }
-function g(): ?int { return c(); } // 错误
+function f(): int { return c(); } // 错误
+function g(): ?int { return c(); }
 function h() { return c(); }
 ```
 
