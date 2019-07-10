@@ -11,7 +11,7 @@ categories: lang
 传统编程语言中往往使用空值（`null` 或者 `None`、`nil` 等）来表达可选值，可谓简单粗暴。
 <!--more-->
 因为这样一来，就需要在每一处使用的地方判断相应的值是否为空，一旦疏忽大意就可能导致程序出错甚至崩溃。
-不仅如此，正如著名的[《十亿美元的错误》](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare)与[《计算机科学中的最严重错误》](·https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/)所说，传统空值还引入了一系列其他问题：破坏了类型系统、易与空容器混为一谈、表意模凌两可、难以调试、不便同语言的其他特性结合使用等。
+不仅如此，正如著名的[《十亿美元的错误》](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare)与[《计算机科学中的最严重错误》](https://www.lucidchart.com/techblog/2015/08/31/the-worst-mistake-of-computer-science/)所说，传统空值还引入了一系列其他问题：破坏了类型系统、易与空容器混为一谈、表意模凌两可、难以调试、不便同语言的其他特性结合使用等。
 
 因此，现代编程语言基本都会避免使用传统空值，而采用更安全的方式来表达可选值，具体方式主要有两种：
   1. 受限的空值：Kotlin、Swift、Hack 等。
