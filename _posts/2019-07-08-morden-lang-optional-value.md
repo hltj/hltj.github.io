@@ -331,7 +331,7 @@ $3 ==> 5
 > let (%?) a b =
 -     match b with
 -     | 0 -> None
--     | _ -> Some(a % b);;
+-     | _ -> Some (a % b);;
 val ( %? ) : a:int -> b:int -> int option
 
 > 18 %? 5;;
