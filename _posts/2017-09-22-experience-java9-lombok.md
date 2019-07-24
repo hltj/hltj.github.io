@@ -44,7 +44,8 @@ $ jshell
 jshell> 
 ```
 
-`jshell> ` 是 JShell 的命令提示符，可在其后直接键入代码。在 JShell 中直接输入可运行的代码就可以，无需定义额外的类与 `main` 函数，还可以省略单行语句的分号。因此运行 Hello World 只需键入 `System.out.println("Hello, World!")` 即可，并且在输入过程中还可以通过 Tab 键补全：
+`jshell> ` 是 JShell 的命令提示符，可在其后直接键入代码。在 JShell 中直接输入可运行的代码就可以，无需定义额外的类与 `main` 函数，还可以省略单行语句的分号。
+因此运行 Hello World 只需键入 `System.out.println("Hello, World!")` 即可，并且在输入过程中还可以通过 Tab 键补全：
 
 ``` java
 jshell> System.out.println("Hello, World!")
@@ -229,21 +230,24 @@ Hello, World!
 添加完成后就可以通过 JDK 9 照常构建与运行 Hello World，无论创建项目时选 Java 项目、Maven 项目还是 Gradle 项目。
 
 ### Hello NetBeans
-最新稳定版的 NetBeans（8.2）并不支持 Java 9，也没有用于 Java 9 支持的插件。想要支持 Java 9 只能用每日构建版，可在这里下载： [http://bits.netbeans.org/download/trunk/nightly/latest/](http://bits.netbeans.org/download/trunk/nightly/latest/)。
+最新稳定版的 NetBeans（8.2）并不支持 Java 9，也没有用于 Java 9 支持的插件。
+想要支持 Java 9 只能用每日构建版，可在这里下载： [http://bits.netbeans.org/download/trunk/nightly/latest/](http://bits.netbeans.org/download/trunk/nightly/latest/)。
 
 在安装时选 JDK 9。之后可以照常构建与运行 Hello World，无论创建项目时选 Java 项目还是 Maven 项目。
 
 > **注：**NetBeans 虽然有 Gradle 插件，但是在每日构建版中安装之后也基本无法使用。
 
 ### Hello World 小结
-以任何方式通过 JRE 9 运行 Hello World 都如预期般顺利。使用 Gradle 或者 IDEA 通过 JDK 9 构建 Hello World 示例项目也一如既往地顺利。而对于 Maven 需要注意显式指定源代码与目标版本，对于 Eclipse 需要安装插件，对于 NetBeans 目前只能用每日构建版。
+以任何方式通过 JRE 9 运行 Hello World 都如预期般顺利。使用 Gradle 或者 IDEA 通过 JDK 9 构建 Hello World 示例项目也一如既往地顺利。
+而对于 Maven 需要注意显式指定源代码与目标版本，对于 Eclipse 需要安装插件，对于 NetBeans 目前只能用每日构建版。
 
 > **注：**示例代码已放到 Github 上： [https://github.com/hltj/java9demo/tree/master/hello](https://github.com/hltj/java9demo/tree/master/hello)。
 
 Hello World 总体上看还比较顺利，接下来我们看下更具挑战的 Lombok 支持情况。
 
 ## Java 9 中使用 Lombok
-代码冗长是 Java 语言广为病诟的缺点之一。而其中很多场景都可以使用 Lombok 来简化，这在实际项目中广泛应用。因此验证 JDK 9 以及使用 JDK 9 的构建工具与 IDE 对 Lombok 的支持情况尤为重要，会关系到很多既有项目能否迁移到 Java 9。
+代码冗长是 Java 语言广为病诟的缺点之一。而其中很多场景都可以使用 Lombok 来简化，这在实际项目中广泛应用。
+因此验证 JDK 9 以及使用 JDK 9 的构建工具与 IDE 对 Lombok 的支持情况尤为重要，会关系到很多既有项目能否迁移到 Java 9。
 
 这里以一段简单代码为例，验证 Maven、Gradle、IDEA、Eclipse、NetBeans 在使用 JDK 9 时对 Lombok 的支持情况。代码如下：
 
@@ -292,7 +296,9 @@ public class LombokDemo {
     </dependencies>
 ```
 
-当然为了便于运行还引入了 assembly 插件，另外设置源代码与目标级别为 1.8，完整的 pom.xml 参见 [https://github.com/hltj/java9demo/blob/7a704a1b4a60cab74e454ab8d2d7edda30af430f/lombok/pom.xml](https://github.com/hltj/java9demo/blob/7a704a1b4a60cab74e454ab8d2d7edda30af430f/lombok/pom.xml)。此时使用 JDK 8、JDK 9 都能正常编译，但只有在 Java 9 环境中才能正常运行，因为 Java 8 的版本号如“1.8.0_144”不能解析为整数，运行时会抛异常。
+当然为了便于运行还引入了 assembly 插件，另外设置源代码与目标级别为 1.8，完整的 pom.xml 参见
+[https://github.com/hltj/java9demo/blob/7a704a1b4a60cab74e454ab8d2d7edda30af430f/lombok/pom.xml](https://github.com/hltj/java9demo/blob/7a704a1b4a60cab74e454ab8d2d7edda30af430f/lombok/pom.xml)。
+此时使用 JDK 8、JDK 9 都能正常编译，但只有在 Java 9 环境中才能正常运行，因为 Java 8 的版本号如“1.8.0_144”不能解析为整数，运行时会抛异常。
 
 但是当我们把 pom.xml 中的源代码与目标的版本号升级为 1.9 时，却编译失败了：
 
@@ -393,7 +399,7 @@ compileJava {
 ![](/assets/java9/netbeans-lombok-result.png)
 
 ### 使用 Lombok 小结
-在 Java 9 环境中使用 Lombok 需要确保编译期有能够提供 `javax.annotation` 的模块可用。
+在 Java 9 环境中使用 Lombok 需要确保编译期有能够提供 `javax.annotation` 的模块可用或者在配置中禁用 javax 注解。
 Maven/Gradle 项目使用 JDK 9 编译都不成问题，使用 Gradle 4.1 到 4.2-RC-2 版除外。
 三款 IDE 中只有 IDEA 能够良好解析 Lombok 注解，Maven 项目只有每日构建版的 NetBeans 能够顺利构建运行，Gradle 项目只有 IDEA 能够构建运行。
 
@@ -403,7 +409,8 @@ Maven/Gradle 项目使用 JDK 9 编译都不成问题，使用 Gradle 4.1 到 4.
 当然有！Java 9 不仅提供了新功能，也有很多优化的地方。让我们看一个简单、直观的示例。
 
 ## 性能提升的示例
-以之前在[由“千万字母表问题”看多范式编程语言](https://hltj.me/lang/2016/11/07/10m-letters.html)中的 Java 代码为例，使用 Java 9 运行的效率相对 Java 8 有显著提升。以下是我分别在不同环境中运行三次取中位数的结果：
+以之前在[由“千万字母表问题”看多范式编程语言](https://hltj.me/lang/2016/11/07/10m-letters.html)中的 Java 代码为例，使用 Java 9 运行的效率相对 Java 8 有显著提升。
+以下是我分别在不同环境中运行三次取中位数的结果：
 
 | 　          | Java 8  | Java 9 |
 |-------------|--------:|-------:|
