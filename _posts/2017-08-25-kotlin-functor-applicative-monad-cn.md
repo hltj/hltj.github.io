@@ -69,7 +69,7 @@ Just(value=5)
 
 ## 究竟什么是 Functor 呢？
 
-在 Haskell 中 `Functor` 是一个[类型类](https://learnyoua.haskell.sg/content/zh-cn/ch03/type-and-typeclass.html#typeclasses入门)。
+在 Haskell 中 `Functor` 是一个[类型类](https://drsexplorer.gitbooks.io/learnyouahaskell-zh/content/zh-cn/ch03/type-and-typeclass.html#typeclasses入门)。
 其定义如下：
 
 ![](/assets/fam/functor_def.png)
@@ -470,10 +470,10 @@ val foo = `do` {
 
 所以，亲爱的朋友（我觉得我们现在是朋友了），我想我们都同意 monad 是一个简单且高明的主意（译注：原文是 SMART IDEA(tm)）。
 现在你已经通过这篇指南润湿了你的口哨，为什么不拉上 Mel Gibson 并抓住整个瓶子呢。
-请参阅《Haskell 趣学指南》的[《来看看几种 Monad》](https://learnyoua.haskell.sg/content/zh-cn/ch12/a-fistful-of-monads.html)。
+请参阅《Haskell 趣学指南》的[《来看看几种 Monad》](https://drsexplorer.gitbooks.io/learnyouahaskell-zh/content/zh-cn/ch12/a-fistful-of-monads.html)。
 其中包含很多我已经炫耀过的东西，因为 Miran 深入这些方面做的非常棒。
 
 > **译注：**Miran 即 Miran Lipovača 是《Haskell 趣学指南》英文原版 [Learn You a Haskell](http://learnyouahaskell.com/) 的作者。
 
 在此向 [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) 原作者 [Aditya Bhargava](http://adit.io/) 致谢，
-向 [Learn You a Haskell](http://learnyouahaskell.com/) 作者 Miran Lipovača 以及 [MnO2](http://blog.mno2.org/)、[Fleurer](http://fleurer-lee.com/) 等[《Haskell 趣学指南》](https://learnyoua.haskell.sg/content/)中文版译者致谢。
+向 [Learn You a Haskell](http://learnyouahaskell.com/) 作者 Miran Lipovača 以及 [MnO2](https://github.com/MnO2)、[Fleurer](https://fleurer.github.io/) 等[《Haskell 趣学指南》](https://github.com/MnO2/learnyouahaskell-zh)中文版译者致谢。
