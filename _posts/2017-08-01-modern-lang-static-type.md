@@ -1,8 +1,9 @@
 ---
-layout:     post
-title:      "现代编程语言系列1：静态类型趋势"
-date:       2017-08-01 19:07:52 +0800
-categories: lang
+layout:        post
+title:         "现代编程语言系列1：静态类型趋势"
+date:          2017-08-01 19:07:52 +0800
+categories:    lang
+redirect_from: /lang/2017/08/01/morden-lang-static-type.html
 ---
 静态类型是现代语言的发展趋势之一。近年来，不仅有很多静态类型的现代语言兴起，还有不少动态类型语言也在引入静态类型支持。<!--more-->
 

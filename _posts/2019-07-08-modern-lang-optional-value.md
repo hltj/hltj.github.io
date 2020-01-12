@@ -1,8 +1,9 @@
 ---
-layout:     post
-title:      "现代编程语言系列2：安全表达可选值"
-date:       2019-07-08 13:15:16 +0800
-categories: lang
+layout:        post
+title:         "现代编程语言系列2：安全表达可选值"
+date:          2019-07-08 13:15:16 +0800
+categories:    lang
+redirect_from: /lang/2019/07/08/morden-lang-optional-value.html
 ---
 这里的可选值（optional value）是指可能无值也可能有一个值的情况，在一些编程语言中称为可空值（nullable value）。
 
