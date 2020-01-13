@@ -257,7 +257,7 @@ interface Functor<C<*>> {
 ```
 
 但遗憾的是上述代码无法通过编译，因为 Kotlin 目前不支持[高阶类型](https://en.wikipedia.org/wiki/Kind_(type_theory))，在泛型参数中用 `C<*>` 表示类型构造器只是**假想**的语法 。
-因此，需要有一种方式来变通。按 [Arrow 的方式](https://arrow-kt.io/docs/patterns/glossary/#higher-kinds) 引入 `Kind` 接口来表示：
+因此，需要有一种方式来变通。按 [Arrow 的方式](https://arrow-kt.io/docs/patterns/glossary/#higher-kinds)引入 `Kind` 接口来表示：
 
 ``` kotlin
 interface Kind<out F, out A>
