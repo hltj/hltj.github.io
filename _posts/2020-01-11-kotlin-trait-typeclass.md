@@ -106,7 +106,8 @@ interface WithDescription<T> {
 }
 ```
 
-这里利用了[分发接收者可以子类化、扩展接收者静态解析](https://www.kotlincn.net/docs/reference/extensions.html#%E6%89%A9%E5%B1%95%E5%A3%B0%E6%98%8E%E4%B8%BA%E6%88%90%E5%91%98)的特性，可以为任何既有类型添加实现。例如分别为 `Char`、`String` 实现如下：
+这里利用了[分发接收者可以子类化、扩展接收者静态解析](https://www.kotlincn.net/docs/reference/extensions.html#%E6%89%A9%E5%B1%95%E5%A3%B0%E6%98%8E%E4%B8%BA%E6%88%90%E5%91%98)的特性，可以为任何既有类型添加实现。
+例如分别为 `Char`、`String` 实现如下：
 
 ``` kotlin
 object CharWithDescription : WithDescription<Char> {
@@ -243,7 +244,8 @@ StringWithFakeLength.run {
 }
 ```
 
-在 REPL 中运行输出是 `128`，表明 `printLenth()` 取到的 `length` 是 `StringWithFakeLength` 中定义的扩展属性而不是 `String` 自身的属性。因此使用时需要特别注意。此外对于 Any 的三个成员 `toString()`、`hashCode()`、`equals()` 会始终调用成员函数，即便在泛型约束上下文中声明了具有相同签名的扩展函数也是一样。
+在 REPL 中运行输出是 `128`，表明 `printLenth()` 取到的 `length` 是 `StringWithFakeLength` 中定义的扩展属性而不是 `String` 自身的属性。因此使用时需要特别注意。
+唯有 Any 的三个成员 `toString()`、`hashCode()`、`equals()` 会始终调用成员函数，即便在泛型约束上下文中声明了具有相同签名的扩展函数也是一样。
 
 ###  “实现”Functor 等
 按照上文介绍的方式，我们可以轻松实现 `Show`、`Eq`、`Ord` 等简单类型类，无需赘述。
@@ -308,7 +310,9 @@ fun main() = with(MaybeFunctor) {
 [Arrow](https://arrow-kt.io/)（按其官网写作 Λrrow）是 Kotlin 标准库的函数式“伴侣”。目前主要以下四套件：
 
 - [Arrow Core](https://arrow-kt.io/docs/core/) 提供了核心的数据类型与类型类。
-- [Arrow FX](https://arrow-kt.io/docs/fx/) 是函数式副作用库，提供了 `do`-表示法/[Monad 推导](https://arrow-kt.io/docs/patterns/monad_comprehensions/#comprehensions-over-coroutines)风格的 DSL。
+- [Arrow FX](https://arrow-kt.io/docs/fx/) 是函数式副作用库，提供了
+  [`do`-表示法](https://github.com/MnO2/learnyouahaskell-zh/blob/master/zh-cn/ch12/a-fistful-of-monads.md#do-%E8%A1%A8%E7%A4%BA%E6%B3%95)/[Monad
+  推导](https://arrow-kt.io/docs/patterns/monad_comprehensions/#comprehensions-over-coroutines)风格的 DSL。
 - [Arrow Optics](https://arrow-kt.io/docs/optics/dsl/) 用于在 Kotlin 中处理不可变数据模型。
 - [Arrow Meta](https://meta.arrow-kt.io/) 是 Kotlin 编译器与 IDE 的函数式“伴侣”。
 
