@@ -69,7 +69,7 @@ Just(value=5)
 
 ## 究竟什么是 Functor 呢？
 
-在 Haskell 中 `Functor` 是一个[类型类](https://drsexplorer.gitbooks.io/learnyouahaskell-zh/content/zh-cn/ch03/type-and-typeclass.html#typeclasses入门)。
+在 Haskell 中 `Functor` 是一个[类型类](https://github.com/MnO2/learnyouahaskell-zh/blob/master/zh-cn/ch03/type-and-typeclass.md#typeclasses%E5%85%A5%E9%97%A8)。
 其定义如下：
 
 ![](/assets/fam/functor_def.png)
@@ -293,7 +293,7 @@ Monad 有一个函数 `))=`（在 Haskell 中是 `>>=`，读作“绑定”）�
 让我们来看个示例。
 老搭档 `Maybe` 是一个 monad：
 
-![正是闲逛的 monad](/assets/fam/context.png)
+![正是悠闲的 monad](/assets/fam/context.png)
 
 假设 `half` 是一个只适用于偶数的函数：
 

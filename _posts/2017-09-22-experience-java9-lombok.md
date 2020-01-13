@@ -213,7 +213,7 @@ Hello, World!
 最新稳定版的 IDEA（2017.2.4）已支持 Java 9。
 在其中使用 Java 9 构建与运行 Hello World 与 Java 8 无异，只需选用 JDK 9 即可：
 
-![](/assets/java9/idea-jdk9.png)
+![IDEA 配置 JDK 9](/assets/java9/idea-jdk9.png)
 
 如果尚未添加点击上图所示的对话框右上方的“New”按钮来添加。
 之后可以照常构建与运行 Hello World，无论创建项目时选 Java 项目、Maven 项目还是 Gradle 项目。
@@ -221,11 +221,11 @@ Hello, World!
 ### Hello Eclipse
 最新稳定版的 Eclipse Oxygen（4.7.0）并没有内置 Java 9 支持，需要安装一个 [Beta 版的 Java 9 支持插件](https://marketplace.eclipse.org/content/java-9-support-beta-oxygen)才行：
 
-![](/assets/java9/eclipse-java9.png)
+![Eclipse 安装 Java 9 插件](/assets/java9/eclipse-java9.png)
 
 之后就可以添加 JDK 9 了：
 
-![](/assets/java9/eclipse-jdk9.png)
+![IDEA 配置 Java 9](/assets/java9/eclipse-jdk9.png)
 
 添加完成后就可以通过 JDK 9 照常构建与运行 Hello World，无论创建项目时选 Java 项目、Maven 项目还是 Gradle 项目。
 
@@ -370,33 +370,33 @@ compileJava {
 ### 在 IDEA 中使用
 如果 IDEA 中已安装 Lombok 插件，并且在项目中开启了注解处理，就能够正常解析 Lombok 注解。但是很遗憾的是，无法直接在 IDEA 中使用 JDK 9 构建：
 
-![](/assets/java9/idea-lombok-err.png)
+![IDEA 中使用 Lombok 时报错](/assets/java9/idea-lombok-err.png)
 
 在 IDEA 中要使用 JDK 9 编译这个项目，需采用将构建与运行委托给 Gradle 的方式：
 
-![](/assets/java9/idea-delegate-to-gradle.png)
+![IDEA 将构建与运行委托给 Gradle](/assets/java9/idea-delegate-to-gradle.png)
 
 这样能够通过 Gradle 来构建，而运行还需要再做几步。首先点击第 15/16 行左侧的运行按钮：
 
-![](/assets/java9/idea-lombok-run.png)
+![IDEA 中的 lombok 示例代码](/assets/java9/idea-lombok-run.png)
 
 在弹出菜单中选择“Run”，此时“Run”窗口中默认显示的是各个 Gradle 任务的执行情况，需要点击侧栏的按钮将其切换到文本模式才能看到输出：
 
-![](/assets/java9/idea-lombok-result.png)
+![IDEA 中 lombok 示例运行结果](/assets/java9/idea-lombok-result.png)
 
 ### 在 Eclipse 中使用
 如果已运行过 lombok.jar 为 Eclipse 添加支持，并且在项目配置中启用了注解处理，那么 Eclipse 能够正常解析代码中的大多数 Lombok 注解，只有 `@Value`、`@ToString` 这两行有问题。
 
 在 Eclipse 中要使用 JDK 9 编译这个项目，需要通过 Maven 方式来构建运行，而且还要去除代码中 `@Value` 与  `@ToString` 注解并修改相关联代码：
 
-![](/assets/java9/eclipse-lombok.png)
+![Eclipse 中的 lombok 示例代码](/assets/java9/eclipse-lombok.png)
 
 ### 在 NetBeans 中使用
 在 Netbeans 每日构建版中即便开启注解处理，仍然只能识别出注解本身，而不能进行相应语义处理，可认为无法解析 Lombok 注解。
 
 在 Netbeans 中要使用 JDK 9 编译这个项目，需要通过 Maven 方式来构建运行：
 
-![](/assets/java9/netbeans-lombok-result.png)
+![NetBeans 中的 lombok 示例代码与运行结果](/assets/java9/netbeans-lombok-result.png)
 
 ### 使用 Lombok 小结
 在 Java 9 环境中使用 Lombok 需要确保编译期有能够提供 `javax.annotation` 的模块可用或者在配置中禁用 javax 注解。

@@ -31,12 +31,12 @@ fun main(args: Array<String>) {
 
 如果把上面代码粘贴在普通文本编辑器中并保存，然后编译会得到以下错误：
 
-![](/assets/langs/type_err1.png)
+![Kotlin 编译器报类型不匹配](/assets/langs/type_err1.png)
 
 即上述代码中的类型不匹配错误可在编译期发现。
 而如果在 IntelliJ IDEA 中手动输入这些代码的话，当输入完第二行的时候，就会得到以下错误提示：
 
-![](/assets/langs/type_err2.png)
+![Kotlin：IDEA 检测出类型不匹配](/assets/langs/type_err2.png)
 
 也就是说，通过 IDEA 的辅助，可以在编码期捕获到类型不匹配的错误。
 
@@ -51,7 +51,7 @@ plus_five("Hello")
 
 在 PyCharm 中，这段代码可以正常键入没有任何错误提示，只是运行时会出现以下报错：
 
-![](/assets/langs/type_err3.png)
+![Python 3 运行时报类型不匹配](/assets/langs/type_err3.png)
 
 现在，我们加上类型标注再试一次：
 
@@ -64,7 +64,7 @@ plus_five("Hello")
 
 当输入完 `plus_five("Hello")` 就能在 PyCharm 中得到以下错误提示：
 
-![](/assets/langs/type_err4.png)
+![Python 3：PyCharm 检测出类型不匹配](/assets/langs/type_err4.png)
 
 可以看出，即使在 Python 3 这样的动态类型语言中，也能通过静态类型（类型标注）与 IDE 辅助成功地将原本要在运行时才能发现的类型不匹配的错误，提前到编码阶段发现。
 
@@ -95,7 +95,7 @@ print(to_constant_name(hello))
 
 当键入到 `s.u` 的时候 PyCharm 就会弹出下图的菜单，按 Tab 即可完成补全：
 
-![](/assets/langs/auto_comp.png)
+![Python 3：PyCharm 中代码补全](/assets/langs/auto_comp.png)
 
 之后的 `.replace()` 与之类似。
 
@@ -130,7 +130,7 @@ end
 
 如果给该函数传一个整型参数，它能够正常输出。而如果传入其他类型的参数，它会报错：
 
-![](/assets/langs/type_err5.png)
+![Julia REPL 报类型不匹配](/assets/langs/type_err5.png)
 
 对于解释执行也会得到类似的错误信息。除此之外 Julia 还会（在 JIT 中）利用类型信息进行性能优化以及函数重载，作为专业的数值计算语言，这两点对 Julia 尤为重要。
 
@@ -156,7 +156,7 @@ function main(): noreturn {
 
 上述代码，在运行类型检查工具时，会报以下错误：
 
-![](/assets/langs/type_err6.png)
+![hh_client 报类型不匹配](/assets/langs/type_err6.png)
 
 当然，检查过后就可以运行相应代码了。虽然检查到了错误，仍然可以忽略之继续任性运行。运行同样会报运行时错误：
 
@@ -243,7 +243,7 @@ val half = 0.5f // 推断为 Float
 
 在 Scala REPL 中运行的截图如下：
 
-![](/assets/langs/type_inf.png)
+![Scala REPL 类型推断](/assets/langs/type_inf.png)
 
 上述变量都是直接以字面值为初值，因此字面值的类型即是变量类型。当然变量的初值还可以是表达式：
 
