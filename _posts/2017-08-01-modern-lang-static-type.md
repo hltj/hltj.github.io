@@ -208,7 +208,7 @@ demo1.groovy: 10: [Static type checking] - Cannot find matching method demo1#pri
 ### 其他
 除此之外，混合类型语言还有 Dart 1、Perl 6 等；在动态类型语言里基础上引入静态类型的还有著名的 TypeScript 语言，以及一堆带有 Typed 前缀的语言，如 Typed Racket、Typed Clojure、Type Scheme、Typed Lua 等等。可见静态类型对于动态类型语言也是一个重要补充。
 
-动态类型的出发点主要是省却类型声明让代码更简洁、编码更便利，另外还能让同样的代码可适用于多种不同类型（鸭子类型）。相比之下传统的 C、Java 以及传统 C++ 等静态类型语言却很麻烦，需要写不少样板代码。而这些问题在现代静态类型语言中已经有明显改善，它们能够提供近乎动态类型语言的简洁便利性的同时，还能确保性能、类型安全以及良好的工具支持。接下来我们就看下静态语言的改善之处吧。
+动态类型的出发点主要是省却类型声明让代码更简洁、编码更便利，另外还能让同样的代码可适用于多种不同类型（鸭子类型）。相比之下 C 语言以及旧版本的 C++、Java 等静态类型语言却很麻烦，需要写不少样板代码。而这些问题在现代静态类型语言中已经有明显改善，它们能够提供近乎动态类型语言的简洁便利性的同时，还能确保性能、类型安全以及良好的工具支持。接下来我们就看下静态语言的改善之处吧。
 
 ## 静态类型的便利性改善
 
@@ -217,21 +217,21 @@ demo1.groovy: 10: [Static type checking] - Cannot find matching method demo1#pri
 
 | 语言         | REPL |
 |--------------|------|
-| Kotlin       | **kotlinc** |
+| Kotlin       | **kotlinc** kshell |
 | Swift        | **swift** |
 | Rust         | irust rusti |
 | Haskell      | **ghci** |
+| OCaml        | **ocaml** utop |
 | F#           | **fsharpi fsi** |
 | C#           | **csharp csi** |
 | Scala        | **scala** |
-| 现代 C++ [^1] | cling |
-| Java         | **jshell**[^2] javarepl |
+| C++          | cling |
+| Java         | **jshell**[^1] javarepl |
 
-[^1]: 现代 C++，即 C++ 11 及其后版本（如 C++ 14、C++ 17 等）的 C++。
-[^2]: Java 9 起提供 jshell。
+[^1]: Java 9 起提供 jshell。
 
 ### 类型推断
-与 C 语言以及传统的 C++/Java 不同，（包括现代 C++ 在内的）现代的静态类型语言可以在很多地方省却显式类型标注，编译器能够从相应的上下文来推断出变量/表达式的类型，这一机制称为类型推断（type inference）。静态类型语言的这一机制让变量声明像动态类型语言一样简洁，例如：
+与 C 语言以及旧版本的 C++/Java 不同，（包括 C++ 11+ 与 Java 10+ 在内的）现代的静态类型语言可以在很多地方省却显式类型标注，编译器能够从相应的上下文来推断出变量/表达式的类型，这一机制称为类型推断（type inference）。静态类型语言的这一机制让变量声明像动态类型语言一样简洁，例如：
 
 ``` kotlin
 // Kotlin 或 Scala 代码
@@ -261,7 +261,7 @@ val b: Byte = 97
 val c: Short = 97
 ```
 
-上述简单字面值以及表达式的类型推断结果在 Kotlin、Scala、Swift、Rust、F# 以及现代 C++ 中都是具体类型。不过在 Haskell 中会与它们有所不同，我们在 GHCi 中看两个示例：
+上述简单字面值以及表达式的类型推断结果在 Kotlin、Scala、Swift、Rust、OCaml、F#、C++ 11+、Java 10+ 中都是具体类型。不过在 Haskell 中会与它们有所不同，我们在 GHCi 中看两个示例：
 
 ``` haskell
 GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
@@ -337,6 +337,13 @@ let max' a b = if (a < b) then b else a
 ```
 
 与 Rust、Kotlin 等显著不同的是，F#/Haskell 的这段代码并没有显式标注泛型。因为 F#/Haskell 能够通过 `<` 自动推断出 `a`、`b` 以及返回值具有可比较的泛型约束（`comparison`/`Ord`）。F#/Haskell 强大的类型推断能力让这段代码看起来如同动态语言一样简洁。
+这段代码也能用于 OCaml，只是机制不同。不过 OCaml 也具有同样强大的类型推断能力，再看一个 OCaml/F#/Haskell 都适用的示例：
+
+``` ocaml
+let swap_pair x = (snd x, fst x)
+``` 
+
+OCaml/F#/Haskell 能够根据 `fst`、`snd` 推断出 `x` 是一个二元组（pair）。
 
 在 F# 中还可以用成员函数/属性作为泛型约束，可以说是类型安全的鸭子类型：
 
@@ -372,5 +379,10 @@ B() |> printInfo;;
 > 
 > 2019-05-15：
 >  - Java REPL 小修正及补充
+> 
+> 2020-03-26：
+>  - 补充 Kotlin REPL
+>  - 增加 Java 10+ 类型推断
+>  - 增加部分 OCaml 相关内容
 
 ---
