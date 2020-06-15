@@ -375,4 +375,4 @@ Java会不会也有这么一天？也许会，不过 Java 12-15 显然没有，�
 再对比灵活、强大的 [Kotlin 协程](https://www.kotlincn.net/docs/reference/coroutines/coroutines-guide.html)在异步程序设计中所带来的便利，还在坚守 Java 的开发者对协程的期待就不难理解了。
 遗憾的是，Project Loom 未能合入 Java 15，那么按照其他特性的演进周期来看，在下一个 LTS（即 Java 17）发布时就算包含进来也不会是稳定特性。
 
-当然，目前 JVM 平台的 5 门主流工业级语言（Java、Kotlin、Scala、Groovy、Clojure）中，只有 Kotlin 具备上述两个特性，欢迎来 [Kotlin 中文站]([https://www.kotlincn.net/docs/reference/](https://www.kotlincn.net/docs/reference/))学习。
+当然，目前 JVM 平台的 5 门主流工业级语言（Java、Kotlin、Scala、Groovy、Clojure）中，只有 Kotlin 具备上述两个特性，欢迎来 [Kotlin 中文站](https://www.kotlincn.net/docs/reference/)学习。
