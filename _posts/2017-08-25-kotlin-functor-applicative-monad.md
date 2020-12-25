@@ -112,7 +112,7 @@ So then you're like, alright `fmap`, please apply `{ it + 3 }` to a `Nothing#`?
 Nothing#
 ```
 
-> **Note:** Here the argument type of the lambda must be annotated explicitly, since there are many types can plus a `Int` in Kotlin.
+> **Note:** Here the argument type of the lambda must be annotated explicitly, since there are many types can plus an `Int` in Kotlin.
 
 ![Bill O'Reilly being totally ignorant about the Maybe functor](/assets/fam/bill.png)
 
@@ -148,7 +148,7 @@ infix fun <T, R> ((T) -> R).`($)`(maybe: Maybe<T>) = maybe.fmap(this)
 ::getPostTitle `($)` findPost(1)
 ```
 
-Here's another example: what happens when you apply a function to a `Iterable`(`List` in Haskell)?
+Here's another example: what happens when you apply a function to an `Iterable`(`List` in Haskell)?
 
 ![](/assets/fam/fmap_list.png)
 
@@ -342,7 +342,7 @@ Where `>>=` is:
 
 ![](/assets/fam/bind_def.png)
 
-In Kotlin, `Monad` can be considered as a type that defines such a infix function:
+In Kotlin, `Monad` can be considered as a type that defines such an infix function:
 
 ```kotlin
 infix fun <T, R> Monad<T>.`))=`(f: ((T) -> Monad<R>)): Monad<R>
@@ -391,7 +391,7 @@ Now let's mosey on over to another example: the `IO` monad:
 ![](/assets/fam/io.png)
 
 > **Note:** Since Kotlin doesn't distinguish between pure and impure function, it doesn't need IO monad at all.
-> This is just a emulation:
+> This is just an emulation:
 > ``` kotlin
 > data class IO<out T>(val `(-`: T)
 > 
