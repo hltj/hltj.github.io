@@ -41,7 +41,7 @@ if (Objects.equals(nullableObj1, nullableObj2)) {
 
 ### 不可变集合不支持空值
 Java 9 引入的 `List.of()`、`Set.of()`、`Map.of()`、`Map.entry()` 以及 Java 10 引入的 `List.copyOf()`、`Set.copyOf()`、`Map.copyOf()`、`Collectors.toUnmodifiableList()`、`Collectors.toUnmodifiableSet()`、`Collectors.toUnmodifiableMap()` 等均不支持 `null`，其中构造不可变的 `Map` 与 `Map.Entry` 时 key、value 均不能为 `null`。
-还需要注意的一点是不能以 `null` 值调用不可变集合的 `contains()`/`containsKey()`/`containsValue()`/`containsAll()` 方法，其中 `containsAll()` 还要求参数集合中不能有 `null`。
+还需要注意的一点是不能以 `null` 值调用不可变集合的 `contains()` / `containsKey()` / `containsValue()` / `containsAll()` 方法，其中 `containsAll()` 还要求参数集合中不能有 `null`。
 
 例如：
 
@@ -66,7 +66,7 @@ Map.of("a", "b").containsKey(null);
 
 千万不要因为这点而放弃不可变集合。
 不可变集合本身有很多优势，Java 10 及以后版本也推荐使用不可变集合。
-只是需要特别注意上述几点：构造字面值时不能有 `null`、调用 `contains()`/`containsKey()` 等之前需要判断变量是否为 `null`、`collect()`/`copyOf()`/`containsAll()` 之前去除 `null` 值。
+只是需要特别注意上述几点：构造字面值时不能有 `null`、调用 `contains()` / `containsKey()` 等之前需要判断参数是否为 `null`、调用 `collect()` / `copyOf()` / `containsAll()` 之前去除参数集合中的 `null` 值。
 例如：
 
 ``` java
