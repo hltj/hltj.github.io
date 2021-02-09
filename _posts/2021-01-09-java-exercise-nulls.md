@@ -101,7 +101,7 @@ var lengthOpt = Optional.ofNullable(nullableString).map(String::length);
 
 **`flatMap()`：处理可选值嵌套情况**
 
-例如，从可空整数列表中取第一个非零值，从列表中取第一个元素可以用 `Stream<Integer>#findFirst()`，该方法返回 `Optional<Integer>`，如果继续用 `map()` 的话，会得到可选值的可选值：
+例如，从可空整数列表中取第一个正值，从列表中取第一个元素可以用 `Stream<Integer>#findFirst()`，该方法返回 `Optional<Integer>`，如果继续用 `map()` 的话，会得到可选值的可选值：
 
 ``` java
 Optional<Optional<Integer>> intOptOpt = Optional.ofNullable(nullableIntList).map(intList ->
