@@ -212,6 +212,7 @@ var nonNullVal = Optional.ofNullable(obj).orElse(nonNullDefault);
 [`StringUtils`](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html) 是 [Commons Lang](https://commons.apache.org/proper/commons-lang/) 中的一个工具类，其中包含一系列与字符串空值相关的方法。
 
 **[`isEmpty()`](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html#isEmpty-java.lang.CharSequence-) 与 [`isNotEmpty()`](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html#isNotEmpty-java.lang.CharSequence-)**
+
 前者判断一个字符序列是否为 `null` 或空序列，后者与之相反——判断一个字符序列既非 `null` 也非空序列。
 这两个方法非常实用，现实业务中对字符串为 `null` 或空串时走同样处理分支的场景很常见。
 
@@ -386,7 +387,7 @@ public static String getIdsString(@Nullable Collection<@NonNull Integer> ids) {
                 .collect(Collectors.joining());
     }
 
-    return Stream.concat(ids.stream(),IMPLICIT_IDS.stream())
+    return Stream.concat(ids.stream(), IMPLICIT_IDS.stream())
             .map(Object::toString)
             .collect(Collectors.joining());
 }
