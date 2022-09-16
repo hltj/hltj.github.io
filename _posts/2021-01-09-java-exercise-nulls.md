@@ -185,19 +185,19 @@ public static <T> T defaultWith(T obj, T defaultVal) {
 原因是 `Optional.of()` 只接受非空参数，如果参数为空就会抛 NPE。
 遗憾的是编写与编译这段代码都不会收到任何警告或提醒，因为无论 IDE 还是编译器都无从知晓这个方法的入参 `obj` 可能为空。
 
-此时，如果我们给 `obj` 加一个 `edu.umd.cs.findbugs.annotations.Nullable` 注解，IDEA 就会对方法中使用 `obj` 调用 `Optional.of()` 标出警告提醒：“Argument 'obj' might be null”。
+此时，如果我们给 `obj` 加一个 `org.jetbrains.annotations.Nullable` 注解，IDEA 就会对方法中使用 `obj` 调用 `Optional.of()` 标出警告提醒：“Argument 'obj' might be null”。
 改为调用 `Optional.ofNullable()` 警告就消失了。
-而如果希望 `defaultVal` 要求非空的话，还可以对 `defaultVal` 标注 `edu.umd.cs.findbugs.annotations.NonNull`，这样一来方法的返回值也会非空，同样可以标注 `NonNull`：
+而如果希望 `defaultVal` 要求非空的话，还可以对 `defaultVal` 标注 `org.jetbrains.annotations.NotNull`，这样一来方法的返回值也会非空，同样可以标注 `NotNull`：
 
 ``` java
-@NonNull
-public static <T> T defaultWith(@Nullable T obj, @NonNull T defaultVal) {
+@NotNull
+public static <T> T defaultWith(@Nullable T obj, @NotNull T defaultVal) {
     return Optional.ofNullable(obj).orElse(defaultVal);
 }
 ```
 
 当然，这只是关于可空性注解使用场景的一个示例，实际上并不需要我们自己造一个这样的轮子，因为有现成的轮子可用（见下文）。
-上述 `Nullable` 与 `NonNull` 两个注解来自于 [spotbugs-annotations](https://javadoc.io/doc/com.github.spotbugs/spotbugs-annotations/latest/index.html)。类似的还有 [Checker Framework 的 Nullness Checker](https://checkerframework.org/manual/#nullness-checker)、[JetBrains 的 java-annotations](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html)、[Lombok 的 NonNull](https://projectlombok.org/features/NonNull) 等。
+上述 `Nullable` 与 `NotNull` 两个注解来自于 [JetBrains 的 java-annotations](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html)。类似的还有 [Checker Framework 的 Nullness Checker](https://checkerframework.org/manual/#nullness-checker)、[spotbugs-annotations](https://javadoc.io/doc/com.github.spotbugs/spotbugs-annotations/latest/index.html)、[Lombok 的 NonNull](https://projectlombok.org/features/NonNull) 等。
 
 ## Apache Commons
 [Apache Commons](https://commons.apache.org/) 有多个库提供了简化空值使用的工具。例如实现类似 `?:`/`??` 的功能，使用 `Optional` 需要这样写：
@@ -346,7 +346,7 @@ if (x1 != null) {
 ### 6、用 `Optional` 重构 `getTitledContent()`
 
 ``` java
-@NonNull
+@NotNull
 public static String getUpperTitle(@Nullable Post post) {
     if (post == null || post.getTitle() == null) {
         log.warning("no title")
@@ -380,7 +380,7 @@ String getChoice(String choice, boolean highest) {
 
 ``` java
 private static final List<Integer> IMPLICIT_IDS = List.of(101, 111, 191);
-public static String getIdsString(@Nullable Collection<@NonNull Integer> ids) {
+public static String getIdsString(@Nullable Collection<@NotNull Integer> ids) {
     if (ids == null) {
         return IMPLICIT_IDS.stream()
                 .map(Object::toString)
