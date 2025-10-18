@@ -74,7 +74,7 @@ WASI 目前有三份实现:
 如果一个程序无意中搅乱了另外一个程序的资源，那么它可能会使另一个程序崩溃。
 更糟的是，如果一个程序（或用户）故意干扰另一个程序的资源，那么它可能会窃取敏感数据。
 
-![表示崩溃的皱着眉头的终端窗口，以及表示数据泄露的带有损坏的锁的文件](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/01-01_crash-data-leak-1.png)
+![表示崩溃的皱着眉头的终端窗口，以及表示数据泄露的带有损坏的锁的文件](https://hacks.mozilla.org/wp-content/uploads/2019/03/01-01_crash-data-leak-1.png)
 
 因此，我们需要一种方式来控制哪些程序与用户可以访问哪些资源。
 人们很早就发现了这一点，并想出了一个提供这种控制的方式：保护环安全。
@@ -86,7 +86,7 @@ WASI 目前有三份实现:
 用户的程序在称之为用户模式的内核以外运行。
 如果程序想做打开文件这样的事，它必须请求内核为它打开。
 
-![左侧是一个文件目录结构，中间有一个包含操作系统内核的保护屏障，右侧是一个敲门访问的应用程序](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/01-02-protection-ring-sec-1.png)
+![左侧是一个文件目录结构，中间有一个包含操作系统内核的保护屏障，右侧是一个敲门访问的应用程序](https://hacks.mozilla.org/wp-content/uploads/2019/03/01-02-protection-ring-sec-1.png)
 
 这就是系统调用的概念所在。
 当程序需要让内核执行这其中某一项操作时，它会使用系统调用来请求。
@@ -95,7 +95,7 @@ WASI 目前有三份实现:
 
 在大多数设备上，这是代码可以访问系统资源的唯一方式——通过系统调用。
 
-![请求操作系统将数据放入已打开文件的应用程序](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/01-03-syscall-1.png)
+![请求操作系统将数据放入已打开文件的应用程序](https://hacks.mozilla.org/wp-content/uploads/2019/03/01-03-syscall-1.png)
 
 操作系统让系统调用可用。
 但是如果每个操作系统都有自身的系统调用，那岂不是需要为每个操作系统编写不同版本的代码？
@@ -114,14 +114,14 @@ WASI 目前有三份实现:
 例如，为 Windows 计算机编译的 `printf` 可以使用 Windows API 与该计算机进行交互。
 而为 Mac 或者 Linux 编译，则会改用 POSIX。
 
-![putc 的接口会翻译为为两种不同的实现，一种使用 POSIX 实现，另一种使用 Windows API 实现](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/02-01-implementations-1.png)
+![putc 的接口会翻译为为两种不同的实现，一种使用 POSIX 实现，另一种使用 Windows API 实现](https://hacks.mozilla.org/wp-content/uploads/2019/03/02-01-implementations-1.png)
 
 然而这却给 WebAssembly 带来了一个问题。
 
 对于 WebAssembly 来说，即使在编译时也无从知晓所面向的是哪种操作系统。
 因此，无法在标准库的 WebAssembly 实现中使用任何单一操作系统的系统接口。
 
-![putc 的空实现](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/02-02-implementations-1.png)
+![putc 的空实现](https://hacks.mozilla.org/wp-content/uploads/2019/03/02-02-implementations-1.png)
 
 我之前说过 WebAssembly 是[一种概念机的汇编语言](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/)，而不是真实计算机的汇编语言。
 同样，WebAssembly 也需要一套概念操作系统（而不是真实操作系统）的系统接口。
@@ -138,7 +138,7 @@ WASI 目前有三份实现:
 这个实现分为两部分——一部分编译成 WebAssembly 模块，另一部分用 JS 胶水代码实现。
 这个 JS 胶水层会调用浏览器，进而与操作系统交互。
 
-![一个 Rube Goldberg 机展示了一个调用如何从 WebAssembly 模块进入到 Emscripten 的 JS 胶水代码中，再进入到浏览器中，再进入到内核中](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/03-01-emscripten-1.png)
+![一个 Rube Goldberg 机展示了一个调用如何从 WebAssembly 模块进入到 Emscripten 的 JS 胶水代码中，再进入到浏览器中，再进入到内核中](https://hacks.mozilla.org/wp-content/uploads/2019/03/03-01-emscripten-1.png)
 
 大多数早期的 WebAssembly 代码都是使用 Emscripten 编译的。
 因此，当人们开始想在没有浏览器的情况下运行 WebAssembly 代码时，他们会从让 Emscripten 所编译的代码能运行入手。
@@ -151,7 +151,7 @@ WASI 目前有三份实现:
 
 例如，对于一个在设计成公开接口的 API 中名为 `read` 的函数，其 JS 胶水代码使用的是 `_system3(which, varargs)`。
 
-![一个清晰的 read 接口，对比一个令人困惑的 system3](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/03-02-system3-1.png)
+![一个清晰的 read 接口，对比一个令人困惑的 system3](https://hacks.mozilla.org/wp-content/uploads/2019/03/03-02-system3-1.png)
 
 第一个参数 `which` 是一个整数，它始终与名称中的数字相同（在本例中是 3）。
 
@@ -167,7 +167,7 @@ WASI 目前有三份实现:
 
 这意味着他们正在重新实现那些对于 Emscripten 的约束有意义的选择（例如将参数作为堆中值传递），即便这些约束并不适于他们的环境。
 
-![一个更复杂的 Rube Goldberg 机，其中 JS 胶水层与浏览器都是由 WebAssembly 运行时模拟的](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/03-03-emulation-1.png)
+![一个更复杂的 Rube Goldberg 机，其中 JS 胶水层与浏览器都是由 WebAssembly 运行时模拟的](https://hacks.mozilla.org/wp-content/uploads/2019/03/03-03-emulation-1.png)
 
 如果我们要构建一个持续数十年的 WebAssembly 生态系统，我们就需要坚实的基础。
 这意味着我们的事实标准不能是仿真的仿真。
@@ -195,7 +195,7 @@ POSIX 提供了源代码级的可移植性。
 我们需要能够编译一次就能在一系列不同的计算机上运行。
 我们需要可移植的二进制文件。
 
-![一个 C 语言源文件编译成单个二进制文件](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/04-02-portability-1.png)
+![一个 C 语言源文件编译成单个二进制文件](https://hacks.mozilla.org/wp-content/uploads/2019/03/04-02-portability-1.png)
 
 这种可移植性让用户分发代码更容易。
 
@@ -212,7 +212,7 @@ POSIX 提供了源代码级的可移植性。
 当该用户启动程序时，该程序代表用户运行。
 如果这个用户有权访问某文件（要么因为他是所有者，要么因为他在有权访问的组里），那么该程序也能访问。
 
-![请求打开与其所执行操作相关的文件的应用程序](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/04-03-access-control-1.png)
+![请求打开与其所执行操作相关的文件的应用程序](https://hacks.mozilla.org/wp-content/uploads/2019/03/04-03-access-control-1.png)
 
 这在用户之间提供了保护。
 在早期操作系统开发出来时很有意义。
@@ -227,7 +227,7 @@ POSIX 提供了源代码级的可移植性。
 该维护者可能会对你的兴趣很上心……也可能是个坏人。
 如果这些代码有权在你的系统上做任何事（例如，打开你的任何文件并通过网络发送出去），那么其代码会造成很大的损害。
 
-![一个恶意应用程序请求访问用户的比特币钱包及打开网络连接](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/04-04-bitcoin-1.png)
+![一个恶意应用程序请求访问用户的比特币钱包及打开网络连接](https://hacks.mozilla.org/wp-content/uploads/2019/03/04-04-bitcoin-1.png)
 
 这就是为什么使用可以直接与系统交互的第三方库可能是危险的。
 
@@ -243,7 +243,7 @@ WebAssembly 采用了沙箱。
 
 只是拥有沙箱机制并不会使系统本身变安全（宿主机仍然可以将所有能力都放入到沙箱中，若是这种情况则并没有变好），不过它至少让宿主机能够选择创建更安全的系统。
 
-![将安全函数放入到沙箱中的运行时以及一个应用](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/04-05-sandbox-1.png)
+![将安全函数放入到沙箱中的运行时以及一个应用](https://hacks.mozilla.org/wp-content/uploads/2019/03/04-05-sandbox-1.png)
 
 在我们设计的任何系统接口中，我们都需要坚持这两项原则。
 可移植性让开发与分发软件更容易，而为宿主机提供保护自身或用户的工具更是绝对必需。
@@ -257,7 +257,7 @@ WebAssembly 采用了沙箱。
 - 创建模块化的一组标准接口
 - 开始标准化最基本的模块 wasi-core
 
-![包含在 WASI 标准成果中的多个模块](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/05-01-wasi-1.png)
+![包含在 WASI 标准成果中的多个模块](https://hacks.mozilla.org/wp-content/uploads/2019/03/05-01-wasi-1.png)
 
 wasi-core 里会有什么？
 
@@ -275,14 +275,14 @@ wasi-core 会包含所有程序都需要的基本接口。
 这就模块化方式的用武之地。
 通过这种方式，我们可以获得良好的标准化覆盖率，同时仍然让一些平台能够只使用对其有意义的 WASI 部分。
 
-![填充了标准化中可能区域的模块（诸如进程、传感器、3D 图形等）](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/05-02-wasi-1.png)
+![填充了标准化中可能区域的模块（诸如进程、传感器、3D 图形等）](https://hacks.mozilla.org/wp-content/uploads/2019/03/05-02-wasi-1.png)
 
 像 Rust 这样的语言会直接在其标准库中使用 wasi-core。
 例如，Rust 的 `open` 在编译到 WebAssembly 时会通过调用 `__wasi_path_open` 来实现。
 
 对于 C 与 C++，我们创建了一个 [wasi-sysroot](https://github.com/CraneStation/wasi-sysroot)，它根据 wasi-core 实现了 libc。
 
-![使用 openat 与 WASI 的 Rust 与 C 语言实现](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/05-03-open-imps-1.png)
+![使用 openat 与 WASI 的 Rust 与 C 语言实现](https://hacks.mozilla.org/wp-content/uploads/2019/03/05-03-open-imps-1.png)
 
 我们期望像 Clang 这样的编译器准备好与 WASI API 交互，并完成像 Rust 编译器与 Emscripten 这样的工具链，将 WASI 作为其系统实现的一部分。
 
@@ -290,14 +290,14 @@ wasi-core 会包含所有程序都需要的基本接口。
 
 运行用户代码的运行时会将 wasi-core 函数作为导入传入。
 
-![将一个导入对象放入沙箱中的运行时](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/05-04-imports-1.png)
+![将一个导入对象放入沙箱中的运行时](https://hacks.mozilla.org/wp-content/uploads/2019/03/05-04-imports-1.png)
 
 这为我们提供了可移植性，因为每个宿主机都可以有专为其平台（从像 Mozilla 的 wasmtime 与 Fastly 的 Lucet，到 Node 乃至浏览器）编写的自身的 wasi-core 实现。
 
 它还为我们提供了沙箱，因为宿主机可以逐个程序选择哪些 wasi-core 函数可以传入（即允许哪些系统调用）。
 这保持了安全性。
 
-![将其自身的 wasi_fd_open 实现传到沙箱中的三个运行时——wastime、Node 以及浏览器](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/05-05-sec-port-2.png)
+![将其自身的 wasi_fd_open 实现传到沙箱中的三个运行时——wastime、Node 以及浏览器](https://hacks.mozilla.org/wp-content/uploads/2019/03/05-05-sec-port-2.png)
 
 WASI 为我们提供了进一步扩展这种安全性的方式。
 它从基于能力的安全性中引入了更多概念。
@@ -311,7 +311,7 @@ WASI 为我们提供了进一步扩展这种安全性的方式。
 这样，就不会有随机请求打开 `/etc/passwd` 的代码。
 相反，代码只能对传给它的目录进行操作。
 
-![沙箱中的两个恶意应用。左边的使用 POSIX 并且成功打开了一个它本不应访问的文件。另一个使用 WASI，而它无法打开该文件。](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/05-06-openat-path-1.png)
+![沙箱中的两个恶意应用。左边的使用 POSIX 并且成功打开了一个它本不应访问的文件。另一个使用 WASI，而它无法打开该文件。](https://hacks.mozilla.org/wp-content/uploads/2019/03/05-06-openat-path-1.png)
 
 这让为沙箱中的代码安全地提供更多不同系统调用的访问控制成为可能——因为这些系统调用的能力是受限的。
 
@@ -322,7 +322,7 @@ WASI 为我们提供了进一步扩展这种安全性的方式。
 
 因此运行时可以将应用可用的文件描述符传到顶层代码，然后这些文件描述符就可以按需传播到系统的其余部分。
 
-![运行时将一个目录传给应用，而后该应用将一个文件传给一个函数](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2019/03/05-07-file-perms-1.png)
+![运行时将一个目录传给应用，而后该应用将一个文件传给一个函数](https://hacks.mozilla.org/wp-content/uploads/2019/03/05-07-file-perms-1.png)
 
 这让 WebAssembly 更接近最小权限原则——一个模块只能访问完成其工作所需的确切资源。
 
