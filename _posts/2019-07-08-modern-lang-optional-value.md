@@ -123,7 +123,7 @@ printLength(new String0("Hello, World"));
 function foo(): int { return hello()?->length(); } // 错误，函数签名要求非空返回值
 ```
 
-Swift 输出的是 `Optional(12)`，它明确表明这是一个 `Int?` 值。Kotlin 与 Swift 虽然直接输出了数字，但其值同样是可空整型，不能用于只接受非空整数的地方。`?.`/`?->`的求值逻辑为：
+Swift 输出的是 `Optional(12)`，它明确表明这是一个 `Int?` 值。Kotlin 与 Hack 虽然直接输出了数字，但其值同样是可空整型，不能用于只接受非空整数的地方。`?.`/`?->`的求值逻辑为：
   1. 如果对象非空，那么访问相应成员。
   2. 如果对象为空，返回空。
   3. 返回类型为可空类型。
@@ -149,7 +149,7 @@ Swift 输出的是 `Optional(12)`，它明确表明这是一个 `Int?` 值。Kot
 a: Int? = 78
 ```
 
-Swift 中只有后续成员的返回值本身也是可空类型时才需要再次使用 `?.`，参见其[官网介绍](https://docs.swift.org/swift-book/LanguageGuide/OptionalChaining.html#ID252)：
+Swift 中只有后续成员的返回值本身也是可空类型时才需要再次使用 `?.`，参见其[官网介绍](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/optionalchaining/#Linking-Multiple-Levels-of-Chaining)：
 
 > ``` swift
 > if let johnsStreet = john.residence?.address?.street {
@@ -438,5 +438,9 @@ fun sendMessageToClient(client: Client?, message: String?, mailer: Mailer) {
 > 2020-03-27：
 >  - 补充 OCaml 4.08+ 的 Option.bind 相关内容
 >  - 增加部分 C# 8+ 相关内容
+> 
+> 2025-10-19：
+>  - 修正手误
+>  - 更新 Swift 多层 Optional 链式调用文档链接
 
 ---

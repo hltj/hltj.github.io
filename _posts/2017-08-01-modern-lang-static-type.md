@@ -217,18 +217,19 @@ demo1.groovy: 10: [Static type checking] - Cannot find matching method demo1#pri
 
 | 语言         | REPL |
 |--------------|------|
-| Kotlin       | **kotlinc** kshell |
-| Swift        | **swift** |
-| Rust         | irust rusti |
-| Haskell      | **ghci** |
-| OCaml        | **ocaml** utop |
-| F#           | **fsharpi fsi** |
-| C#           | **csharp csi** |
-| Scala        | **scala** |
-| C++          | cling |
-| Java         | **jshell**[^1] javarepl |
+| Kotlin       | **`kotlinc`** `kshell` |
+| Swift        | **`swift`** / **`swift repl`**[^1] |
+| Rust         | `irust` `rusti` |
+| Haskell      | **`ghci`** |
+| OCaml        | **`ocaml`** `utop` |
+| F#           | **`fsharpi` `fsi`** |
+| C#           | **`csharp` `csi`** |
+| Scala        | **`scala`** |
+| C++          | `cling` |
+| Java         | **`jshell`**[^2] `javarepl` |
 
-[^1]: Java 9 起提供 jshell。
+[^1]: Swift 5.6 起必须传子命令 `repl` 来启动 REPL。
+[^2]: Java 9 起提供 jshell。
 
 ### 类型推断
 与 C 语言以及旧版本的 C++/Java 不同，（包括 C++ 11+ 与 Java 10+ 在内的）现代的静态类型语言可以在很多地方省却显式类型标注，编译器能够从相应的上下文来推断出变量/表达式的类型，这一机制称为类型推断（type inference）。静态类型语言的这一机制让变量声明像动态类型语言一样简洁，例如：
@@ -297,14 +298,14 @@ val v = if (a) new A else new B
 ```
 
 上面的变量 `v` 会被推断为类型 `I`，这是因为 `if` 表达式两个分支分别返回类型 `A` 和类型 `B`，因此 `v` 必须既能接受 `A` 类型也能接受 `B` 类型，于是 Scala 将其推断为二者的公共超类型 `I`。
-当不同分支的值有多个公共超类型时，Scala、Java 10+、Kotlin 1.3.20+[^2] 还支持将表达式推断为交类型，例如（Kotlin 示例）：
+当不同分支的值有多个公共超类型时，Scala、Java 10+、Kotlin 1.3.20+[^3] 还支持将表达式推断为交类型，例如（Kotlin 示例）：
 
 ``` kotlin
 >>> { if (true) 1.0 else 0 }
 res0: () -> {Comparable<{Double & Int}> & Number} = ……
 ```
 
-[^2]: Kotlin 1.3.20-1.3.72 需要加选项 `-Xnew-inference` 启用新版类型推断才能支持，1.4.0 起默认采用新版类型推断。
+[^3]: Kotlin 1.3.20-1.3.72 需要加选项 `-Xnew-inference` 启用新版类型推断才能支持，1.4.0 起默认采用新版类型推断。
 
 ### 泛型
 与动态类型语言相比，静态类型语言通常缺少对鸭子类型的支持。静态类型语言通过泛型来解决这一问题，因此现代静态类型语言都支持泛型。
@@ -395,5 +396,8 @@ B() |> printInfo;;
 > 
 > 2020-06-24：
 >  - 补充 Kotlin、Scala、Java 智能类型推断
+> 
+> 2025-10-19：
+>  - 更新新版本 Swift REPL 命令
 
 ---
